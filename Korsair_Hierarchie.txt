@@ -1,0 +1,75 @@
+Projet S4
+
+"Jeu du Korsair
+
+Ci dessous l'organisation du projet"
+
+- Carte.js
+  - variables de classe
+    "	idCarte
+    	type // Galion, Pirates, Amiral, Capitaine
+    	valeur
+    	couleur
+    	idJoueur
+    	cheminImage"
+  - functions
+    "
+    	newGalion(val)
+    	newPirate(val, couleur)
+    	newAmiral()
+    	newCapitaine(couleur)
+    
+    	creerPaquets()"
+- Joueur.js
+  - variables de classe
+    "	idJoueur
+    	pseudo
+    	cartesEnMain
+    	carteSelectionne
+    	battaillesGagnees"
+  - functions
+    "	newJoueur(cartes, pseudo)
+    	getScore()
+    
+    	piocher()
+    	poser(carte)"
+- Bataille.js
+  - variables de classe
+    "
+    listeCartes
+    galion"
+  - fonctions
+    "	
+    	newBataille(galion) //idJoueur, tasDeCartes
+    	batailleGagnante() //renvoie l'idDuJoueurGagnant
+    	addCarte(carte)"
+- Jeu.js
+  "	"
+  - variables globale
+    "	pioche
+    	batailles
+    	joueurs
+    	idJoueurActif //celui qui est en train de jouer"
+  - functions
+    "	alea(min, max)
+    	
+    	melangerPioche()
+    	initPioche()
+    	piocherCarte()
+    	
+    	initJoueurs() //associer actionJoueur() au onClick onKeyDown
+    	initJeu()
+    	afficherJeu() 
+    	isPartieFinie() //pioche.size = 0, un des joueurs n'as plus de cartes en main
+    	finDeTour() //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
+    	finDeTourDeJeu()
+    	bataillesGagnante() // met à jour les batailles
+    
+    	poserGalion()
+    	poserPirate()
+    	poserAmiral()
+    	poserCapitaine()
+    	
+    	selectionnerCarte()
+    	jouerCarte()
+    	actionJoueur() // piocher, selectionnerCarte, jouerCarte; appel finDeTour()"
