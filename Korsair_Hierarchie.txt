@@ -5,6 +5,8 @@ Projet S4
 Ci dessous l'organisation du projet"
 
 - Carte.js
+  - variables statiques
+	idCarteStatic //permet d'attribuer un id à la carte actuelle
   - variables de classe
     "	idCarte
     	type // Galion, Pirates, Amiral, Capitaine
@@ -21,12 +23,14 @@ Ci dessous l'organisation du projet"
     
     	creerPaquets()"
 - Joueur.js
+  - variables statiques
+	idJoueurStatic //permet d'attribuer un id au joueur actuelle
   - variables de classe
     "	idJoueur
     	pseudo
     	cartesEnMain
     	carteSelectionne
-    	battaillesGagnees"
+    	bataillesGagnees"
   - functions
     "	newJoueur(cartes, pseudo)
     	getScore()
