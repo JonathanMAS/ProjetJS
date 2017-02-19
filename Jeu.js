@@ -28,12 +28,28 @@ function afficherJeu(){
 	
 }
 function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes en main
-	
+	if(pioche.size==0&&(joueurs[0].cartesEnMain==null||joueurs[0].cartesEnMain==null)){
+		return true;
+	}else{
+		return false;
+	}
 }
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-	
+	if(idJoueurActif==joueurs[0].idJoueur){
+		idJoueurActif=joueurs[1].idJoueur;
+	}else{
+		finDeTourDeJeu();
+	}
 }
+
+
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
+	bataillesGagnantes();
+	if(isPartieFinie()){
+							//Une fonction pour finir le jeu? 
+	}else{
+		idJoueurActif=joueurs[0].idJoueur;
+	}
 	
 }
 function bataillesGagnantes(){ // met à jour chacune des batailles
