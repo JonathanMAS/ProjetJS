@@ -23,7 +23,7 @@ function newPirate(val, couleur){
 }
 
 function newCapitaine(couleur){
-	var c = new Carte(idCarteStatic, "Capitaine", null, "", -1, "assets/img/capitaine_"+couleur+".png"); //Un truc dans le genre
+	var c = new Carte(idCarteStatic, "Capitaine", null, couleur, -1, "assets/img/capitaine_"+couleur+".png"); //Un truc dans le genre
 	idCarteStatic++;
 	return c;
 }
