@@ -8,14 +8,24 @@ function alea(min, max){
 	return Math.floor(Math.random()*(max-min+1)+min) ;
 }
 
-function melangerPioche(var pioche){
-	
+function melangerPioche(){
+	var place = 0;
+	var const;
+	for(var i = 0; i < pioche.length; i++){
+		place = alea(0, pioche.length);
+		const = pioche[i];
+		pioche[i] = pioche[place];
+		pioche[place] = const;
+	}
+
 }
+
 function initPioche(){
  this.pioche= creerPaquets();
  melangerPioche(this.pioche);
  }
  
+
 function piocherCarte(){
 	var carte = pioche[pioche.length];
 	var mains = joueurs[idJoueurActif].cartesEnMain.length;
@@ -26,11 +36,13 @@ function piocherCarte(){
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 
 }
+
 function initJeu(){
 	initJoueurs();
 	initPioche();
 
 }
+
 function afficherJeu(){
 
 }
@@ -42,6 +54,7 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes 
 		return false;
 	}
 }
+
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
 	if(idJoueurActif==joueurs[0].idJoueur){
 		idJoueurActif=joueurs[1].idJoueur;
@@ -71,9 +84,11 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 function poserGalion(var Carte){
 	this.batailles[this.batailles.length] = newBataille(Carte);
 }
+
 function poserPirate(var bataille,var carte){ 
 	bataille.addCarte(carte);
 }
+
 function poserAmiral(var bataille,var carte){
 	bataille.addCarte(carte);
 }
@@ -89,9 +104,11 @@ function selectionnerCarte(){
 
 }
 
+
 function jouerCarte(){
 
 }
+
 
 function actionJoueur(){ // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
 	
