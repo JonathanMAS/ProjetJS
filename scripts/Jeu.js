@@ -47,8 +47,8 @@ function afficherJeu(){
 
 }
 
-function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes en main
-	if(pioche.size==0&&(joueurs[0].cartesEnMain==null||joueurs[0].cartesEnMain==null)){
+function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en main
+	if(pioche.size==0 && (joueurs[0].cartesEnMain==null||joueurs[1].cartesEnMain==null)){
 		return true;
 	}else{
 		return false;
@@ -73,11 +73,11 @@ function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini l
 }
 
 function bataillesGagnantes(){ // met à jour chacune des batailles
-			for(int i=0; this.batailles<this.batailles.length; i++){
-				var victoire =  batailles[i].batailleGagnante();
-				if(victoire!=-1){
-					this.joueurs[victoire].bataillesGagnees=batailles[i];
-			}
+	for(int i=0; this.batailles<this.batailles.length; i++){
+		var victoire =  batailles[i].batailleGagnante();
+		if(victoire!=-1){
+			this.joueurs[victoire].bataillesGagnees=batailles[i];
+		}
 	}
 }
 
