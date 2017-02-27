@@ -18,8 +18,9 @@ function Joueur(idJoueur, pseudo, cartesEnMain, carteSelectionne, bataillesGagne
 	}
 	
 	
-	this.piocher = function (){
-		//TODO
+	this.piocher = function (){		
+		var carte = pioche.pop();
+		cartesEnMain.push(carte);
 	}
 	
 	
