@@ -20,7 +20,7 @@ function melangerPioche(){
 }
 
 function initPioche(){
-	
+	 
 }
 
 function piocherCarte(){
