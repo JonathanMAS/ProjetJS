@@ -1,4 +1,4 @@
-﻿
+
 var pioche;
 var batailles;
 var joueurs;
@@ -8,25 +8,33 @@ function alea(min, max){
 	return Math.floor(Math.random()*(max-min+1)+min) ;
 }
 
-function melangerPioche(){
+function melangerPioche(var pioche){
 	
 }
 function initPioche(){
-	
-}
+ this.pioche= creerPaquets();
+ melangerPioche(this.pioche);
+ }
+ 
 function piocherCarte(){
-	
+	var carte = pioche[pioche.length];
+	var mains = joueurs[idJoueurActif].cartesEnMain.length;
+	joueurs[idJoueurActif].cartesEnMain[mains]=pioche[pioche.length];
+	pioche[pioche.length]=null;
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-	
+
 }
 function initJeu(){
-	
+	initJoueurs();
+	initPioche();
+
 }
 function afficherJeu(){
-	
+
 }
+
 function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes en main
 	if(pioche.size==0&&(joueurs[0].cartesEnMain==null||joueurs[0].cartesEnMain==null)){
 		return true;
@@ -44,37 +52,47 @@ function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), is
 
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
-	bataillesGagnantes();
 	if(isPartieFinie()){
-							//Une fonction pour finir le jeu? 
+		afficheFinPartie();					//Une fonction pour finir le jeu?
 	}else{
 		idJoueurActif=joueurs[0].idJoueur;
 	}
-	
-}
-function bataillesGagnantes(){ // met à jour chacune des batailles
-	
 }
 
-function poserGalion(){
-	
+function bataillesGagnantes(){ // met à jour chacune des batailles
+			for(int i=0; this.batailles<this.batailles.length; i++){
+				var victoire =  batailles[i].batailleGagnante();
+				if(victoire!=-1){
+					this.joueurs[victoire].bataillesGagnees=batailles[i];
+			}
+	}
 }
-function poserPirate(){
-	
+
+function poserGalion(var Carte){
+	this.batailles[this.batailles.length] = newBataille(Carte);
 }
-function poserAmiral(){
-	
+function poserPirate(var bataille,var carte){ 
+	bataille.addCarte(carte);
 }
-function Capitaine(){
-	
+function poserAmiral(var bataille,var carte){
+	bataille.addCarte(carte);
 }
+
+function Capitaine(var bataille,var carte){
+	var nbcartes= bataille.listeCarte.length;
+	for(int i=0; i<bataille.listeCarte.length;i++){
+		var carte=bataille.listeCarte[i];
+		if(carte
+	}
 
 function selectionnerCarte(){
-	
+
 }
-function joueurCarte(){
-	
+
+function jouerCarte(){
+
 }
+
 function actionJoueur(){ // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
 	
 }
