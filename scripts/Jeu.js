@@ -94,10 +94,7 @@ function poserAmiral(var bataille,var carte){
 }
 
 function Capitaine(var bataille,var carte){
-	var nbcartes= bataille.listeCarte.length;
-	for(int i=0; i<bataille.listeCarte.length;i++){
-		var carte=bataille.listeCarte[i];
-		if(carte
+	bataille.addCarte(carte);
 	}
 
 function selectionnerCarte(){
@@ -106,7 +103,18 @@ function selectionnerCarte(){
 
 
 function jouerCarte(){
-
+	if(carte.type="Galion"){
+		poserGalion(carte);
+	}
+	if(carte.type="Pirate"){
+		poserPirate(carte);
+	}
+	if(carte.type="Amiral"){
+		poserAmiral(carte);
+	}
+	if(carte.type="Capitaine"){
+		poserCapitaine(carte);
+	}
 }
 
 
