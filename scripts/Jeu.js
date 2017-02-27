@@ -9,11 +9,20 @@ function alea(min, max){
 }
 
 function melangerPioche(){
-	
+	var place = 0;
+	var const;
+	for(var i = 0; i < pioche.length; i++){
+		place = alea(0, pioche.length);
+		const = pioche[i];
+		pioche[i] = pioche[place];
+		pioche[place] = const;
+	}
 }
+
 function initPioche(){
-	
+	 
 }
+
 function piocherCarte(){
 	
 }
@@ -21,12 +30,15 @@ function piocherCarte(){
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 	
 }
+
 function initJeu(){
 	
 }
+
 function afficherJeu(){
 	
 }
+
 function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes en main
 	if(pioche.size==0&&(joueurs[0].cartesEnMain==null||joueurs[0].cartesEnMain==null)){
 		return true;
@@ -34,6 +46,7 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes 
 		return false;
 	}
 }
+
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
 	if(idJoueurActif==joueurs[0].idJoueur){
 		idJoueurActif=joueurs[1].idJoueur;
@@ -52,6 +65,7 @@ function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini l
 	}
 	
 }
+
 function bataillesGagnantes(){ // met à jour chacune des batailles
 	
 }
@@ -59,12 +73,15 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 function poserGalion(){
 	
 }
+
 function poserPirate(){
 	
 }
+
 function poserAmiral(){
 	
 }
+
 function Capitaine(){
 	
 }
@@ -72,9 +89,11 @@ function Capitaine(){
 function selectionnerCarte(){
 	
 }
+
 function joueurCarte(){
 	
 }
+
 function actionJoueur(){ // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
 	
 }
