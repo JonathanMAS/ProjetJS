@@ -23,5 +23,15 @@ function afficherPioche(){
     //afficher pioche (+ animation...)
 }
 
+function afficheFinPartie(){
+	//afficher points des joueurs + réinitialisé le jeu ...
+}
 
+function afficherBatailles(){
+	 //afficher la liste des batailles (permet aussi de mettre à jour l'affichage)
+	}
+
+function afficherNouvelleBataille(){
+	//afficher une nouvelle suite à la pose d'un galion	
+	}
 
