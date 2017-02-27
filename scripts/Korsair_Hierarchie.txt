@@ -1,4 +1,4 @@
-Projet S4
+﻿Projet S4
 
 "Jeu du Korsair
 
@@ -6,7 +6,7 @@ Ci dessous l'organisation du projet"
 
 - Carte.js
   - variables statiques
-	idCarteStatic //permet d'attribuer un id � la carte actuelle
+	idCarteStatic //permet d'attribuer un id à la carte actuelle
   - variables de classe
     "	idCarte
     	type // Galion, Pirates, Amiral, Capitaine
@@ -40,7 +40,7 @@ Ci dessous l'organisation du projet"
 - Bataille.js
   - variables de classe
     "
-    listeCartes
+    listeCartes // si la dernière carte la plus forte posée apartient au joueur courant, il gagne la bataille
     galion"
   - fonctions
     "	
@@ -67,7 +67,7 @@ Ci dessous l'organisation du projet"
     	isPartieFinie() //pioche.size = 0, un des joueurs n'as plus de cartes en main
     	finDeTour() //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
     	finDeTourDeJeu()
-    	bataillesGagnante() // met � jour les batailles
+    	bataillesGagnante() // met à jour les batailles
     
     	poserGalion()
     	poserPirate()
