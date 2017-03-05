@@ -23,5 +23,17 @@ function afficherPioche(){
     //afficher pioche (+ animation...)
 }
 
+function SelectionnerCarte(){
+    //afficher pioche (+ animation...)
+}
 
+function SelectionnerBataille(){
+    //afficher pioche (+ animation...)
+}
 
+function PoserCarte(){
+    //afficher pioche (+ animation...)
+}
+function PiocherCarte(){
+    //afficher pioche (+ animation...)
+}
