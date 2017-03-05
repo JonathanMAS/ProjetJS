@@ -1,4 +1,3 @@
-
 var pioche;
 var batailles;
 var joueurs;
@@ -18,13 +17,11 @@ function melangerPioche(){
 		pioche[place] = const;
 	}
 
-}
 
 function initPioche(){
- this.pioche= creerPaquets();
- melangerPioche(this.pioche);
+  this.pioche= creerPaquets();
+  melangerPioche(this.pioche);
  }
- 
 
 function piocherCarte(){
 	var carte = pioche[pioche.length];
@@ -95,7 +92,7 @@ function poserAmiral(var bataille,var carte){
 
 function Capitaine(var bataille,var carte){
 	bataille.addCarte(carte);
-	}
+}
 
 function selectionnerCarte(){
 
