@@ -1,4 +1,3 @@
-
 var pioche;
 var batailles;
 var joueurs;
@@ -8,7 +7,6 @@ function alea(min, max){
 	return Math.floor(Math.random()*(max-min+1)+min) ;
 }
 
-<<<<<<< HEAD
 function melangerPioche(){
 	var place = 0;
 	var const;
@@ -18,23 +16,13 @@ function melangerPioche(){
 		pioche[i] = pioche[place];
 		pioche[place] = const;
 	}
-=======
-function melangerPioche(var pioche){
-	
->>>>>>> origin/matthieu
-}
+
 
 function initPioche(){
-<<<<<<< HEAD
-	 
-}
-
-=======
- this.pioche= creerPaquets();
- melangerPioche(this.pioche);
+  this.pioche= creerPaquets();
+  melangerPioche(this.pioche);
  }
- 
->>>>>>> origin/matthieu
+
 function piocherCarte(){
 	var carte = pioche[pioche.length];
 	var mains = joueurs[idJoueurActif].cartesEnMain.length;
@@ -56,8 +44,8 @@ function afficherJeu(){
 
 }
 
-function isPartieFinie(){ //pioche.size = 0, un des joueurs n'as plus de cartes en main
-	if(pioche.size==0&&(joueurs[0].cartesEnMain==null||joueurs[0].cartesEnMain==null)){
+function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en main
+	if(pioche.size==0 && (joueurs[0].cartesEnMain==null||joueurs[1].cartesEnMain==null)){
 		return true;
 	}else{
 		return false;
@@ -82,57 +70,50 @@ function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini l
 }
 
 function bataillesGagnantes(){ // met à jour chacune des batailles
-			for(int i=0; this.batailles<this.batailles.length; i++){
-				var victoire =  batailles[i].batailleGagnante();
-				if(victoire!=-1){
-					this.joueurs[victoire].bataillesGagnees=batailles[i];
-			}
+	for(int i=0; this.batailles<this.batailles.length; i++){
+		var victoire =  batailles[i].batailleGagnante();
+		if(victoire!=-1){
+			this.joueurs[victoire].bataillesGagnees=batailles[i];
+		}
 	}
 }
 
 function poserGalion(var Carte){
 	this.batailles[this.batailles.length] = newBataille(Carte);
 }
-<<<<<<< HEAD
 
-function poserPirate(){
-	
-}
-
-function poserAmiral(){
-	
-}
-
-function Capitaine(){
-	
-=======
 function poserPirate(var bataille,var carte){ 
 	bataille.addCarte(carte);
 }
+
 function poserAmiral(var bataille,var carte){
 	bataille.addCarte(carte);
->>>>>>> origin/matthieu
 }
 
 function Capitaine(var bataille,var carte){
-	var nbcartes= bataille.listeCarte.length;
-	for(int i=0; i<bataille.listeCarte.length;i++){
-		var carte=bataille.listeCarte[i];
-		if(carte
-	}
+	bataille.addCarte(carte);
+}
 
 function selectionnerCarte(){
 
 }
 
-<<<<<<< HEAD
-function joueurCarte(){
-	
-=======
-function jouerCarte(){
 
->>>>>>> origin/matthieu
+function jouerCarte(){
+	if(carte.type="Galion"){
+		poserGalion(carte);
+	}
+	if(carte.type="Pirate"){
+		poserPirate(carte);
+	}
+	if(carte.type="Amiral"){
+		poserAmiral(carte);
+	}
+	if(carte.type="Capitaine"){
+		poserCapitaine(carte);
+	}
 }
+
 
 function actionJoueur(){ // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
 	
