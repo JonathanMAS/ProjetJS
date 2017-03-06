@@ -31,7 +31,7 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-	var cartes;
+    	var cartes;
 	
 	for(int j = 0; j < 2; j++){
 		for (int i=0;i<6;i++){

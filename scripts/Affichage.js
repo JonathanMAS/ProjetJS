@@ -1,7 +1,14 @@
+var size = {
+width: document.body.clientWidth ,
+height: document.body.clientHeight
+};
 
-function afficherPaquetJoueur(var nbJoueur){
+document.body.onload = defineFieldGame;
+document.body.onresize = afficherPioche;
+
+function afficherPaquetJoueur(nbJoueur){
     //nbJoueur>=2
-    switch nbJoueur{
+    switch(nbJoueur){
     case 2:
         break;
     case 3:
@@ -16,11 +23,15 @@ function afficherPaquetJoueur(var nbJoueur){
 }
 
 function defineFieldGame(){
-    //div scroll
+    var fieldGame = document.getElementById("fieldGame");
+    fieldGame.style.width = size.width + 'px';
+    afficherPioche();
 }
 
 function afficherPioche(){
-    //afficher pioche (+ animation...)
+    var pioche = document.getElementById("pioche");
+    pioche.style.paddingTop = ((size.height-200) - pioche.clientHeight)/2 + 'px';
+    pioche.style.paddingBottom =((size.height-200) - pioche.clientHeight)/2 + 'px';
 }
 
 function PoserCarte(){
