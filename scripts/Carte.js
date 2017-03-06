@@ -11,25 +11,25 @@ function Carte(id, type, val, couleur, idJoueur, cheminImage){
 }
 
 function newGalion(val){
-	var g = new Carte(idCarteStatic, "Galion", val, "", -1, "res/img/galion.png"); //Un truc dans le genre
+	var g = new Carte(idCarteStatic, "Galion", val, "", -1, "res/cartes/galion/"+val+".png"); //Un truc dans le genre
 	idCarteStatic++;
 	return g;
 }
 
 function newPirate(val, couleur){
-	var p = new Carte(idCarteStatic, "Pirate", val, couleur, -1, "res/img/pirate_"+couleur+".png"); //Un truc dans le genre
+	var p = new Carte(idCarteStatic, "Pirate", val, couleur, -1, "res/cartes/"+couleur+"/"+val+".png"); //Un truc dans le genre
 	idCarteStatic++;
 	return p;
 }
 
 function newCapitaine(couleur){
-	var c = new Carte(idCarteStatic, "Capitaine", null, couleur, -1, "res/img/capitaine_"+couleur+".png"); //Un truc dans le genre
+	var c = new Carte(idCarteStatic, "Capitaine", null, couleur, -1, "res/cartes/"+couleur+"/capitaine.png"); //Un truc dans le genre
 	idCarteStatic++;
 	return c;
 }
 
 function newAmiral(){
-	var a = new Carte(idCarteStatic, "Amiral", null, "", -1, "res/img/amiral.png"); //Un truc dans le genre
+	var a = new Carte(idCarteStatic, "Amiral", null, "", -1, "res/cartes/amiral.png"); //Un truc dans le genre
 	idCarteStatic++;
 	return a;
 }
