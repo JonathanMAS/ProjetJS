@@ -31,7 +31,7 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-
+    
 }
 
 function initJeu(){
