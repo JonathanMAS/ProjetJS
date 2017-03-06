@@ -47,13 +47,13 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-    	var cartes = [];
+    	
 	
 	for(var j = 0; j < 2; j++){
 		idJoueurActif = j;
-        	joueurs.push(newJoueur(cartes,null));
+        	joueurs.push(newJoueur([], null));
 		for (var i=0;i<6;i++){
-			cartes[i]= piocherCarte();
+			piocherCarte();
 		}
 	}
 }
