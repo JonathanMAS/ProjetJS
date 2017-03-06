@@ -14,6 +14,8 @@ function alea(min, max){
 function start(){
     defineFieldGame();
     afficherPioche();
+    initJeu();
+    afficherPaquetsJoueurs();
 }
 function resize(){
     afficherPioche();
@@ -33,7 +35,7 @@ function melangerPioche(){
 
 
 function initPioche(){
-  this.pioche= creerPaquets();
+  this.pioche= creerPaquet();
   melangerPioche(this.pioche);
  }
 
