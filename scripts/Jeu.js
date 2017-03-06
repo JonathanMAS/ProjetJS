@@ -1,7 +1,7 @@
 var pioche;
 var batailles;
 var joueurs; //array de joueur, indice 0 c'est nous
-var idJoueurActif; //celui qui est en train de jouer
+var idJoueurActif =0 ; //celui qui est en train de jouer
 
 document.body.onload = start;
 document.body.onresize = resize;
@@ -14,6 +14,8 @@ function alea(min, max){
 function start(){
     defineFieldGame();
     afficherPioche();
+    initJeu();
+    afficherPaquetsJoueurs();
 }
 function resize(){
     afficherPioche();
@@ -33,7 +35,7 @@ function melangerPioche(){
 
 
 function initPioche(){
-  this.pioche= creerPaquets();
+  this.pioche= creerPaquet();
   melangerPioche(this.pioche);
  }
 
@@ -48,16 +50,16 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
     	var cartes;
 	
 	for(var j = 0; j < 2; j++){
+        joueurs[j]=newJoueur(cartes,null);
 		for (var i=0;i<6;i++){
 			cartes[i]= piocherCarte();
 		}
-		joueurs[j]=newJoueurs(cartes,null);
 	}
 }
 
 function initJeu(){
+    initJoueurs();
 	initPioche();
-	initJoueurs();
 }
 
 function afficherJeu(){

@@ -4,21 +4,13 @@ height: document.body.clientHeight
 };
 
 
+function afficherPaquetsJoueurs(){
+    afficherCartesAdversaire();
+}
 
-function afficherPaquetJoueur(nbJoueur){
-    //nbJoueur>=2
-    switch(nbJoueur){
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-        
-    }
-    //switch 2 haut IA bas joueur
-    //switch 3 haut IA bas joueur gauche joueur
-    //switch 4 haut IA droite / gauche / bas Joueur
+function afficherCartesAdversaire(){
+    var nb_cartes= joueurs[1].cartesEnMain.length;
+    alert(nb_cartes);
 }
 
 function defineFieldGame(){
