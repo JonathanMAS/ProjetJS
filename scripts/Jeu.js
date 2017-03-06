@@ -1,6 +1,6 @@
 var pioche;
 var batailles;
-var joueurs;
+var joueurs; //array de joueur, indice 0 c'est nous
 var idJoueurActif; //celui qui est en train de jouer
 
 function alea(min, max){
@@ -32,10 +32,13 @@ function piocherCarte(){
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 	var cartes;
-	for (int i=0;i<6;i++){
-	cartes[i]= piocherCarte();
+	
+	for(int j = 0; j < 2; j++){
+		for (int i=0;i<6;i++){
+			cartes[i]= piocherCarte();
+		}
+		joueurs[j]=newJoueurs(cartes,null);
 	}
-	Joueurs[0]=newJoueurs(cartes,null);
 }
 
 function initJeu(){
