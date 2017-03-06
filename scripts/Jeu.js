@@ -50,7 +50,8 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
     	var cartes = [];
 	
 	for(var j = 0; j < 2; j++){
-        joueurs.push(newJoueur(cartes,null));
+		idJoueurActif = j;
+        	joueurs.push(newJoueur(cartes,null));
 		for (var i=0;i<6;i++){
 			cartes[i]= piocherCarte();
 		}
