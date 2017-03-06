@@ -3,8 +3,7 @@ width: document.body.clientWidth ,
 height: document.body.clientHeight
 };
 
-document.body.onload = defineFieldGame;
-document.body.onresize = afficherPioche;
+
 
 function afficherPaquetJoueur(nbJoueur){
     //nbJoueur>=2
@@ -25,13 +24,13 @@ function afficherPaquetJoueur(nbJoueur){
 function defineFieldGame(){
     var fieldGame = document.getElementById("fieldGame");
     fieldGame.style.width = size.width + 'px';
-    afficherPioche();
 }
 
 function afficherPioche(){
     var pioche = document.getElementById("pioche");
-    pioche.style.paddingTop = ((size.height-200) - pioche.clientHeight)/2 + 'px';
-    pioche.style.paddingBottom =((size.height-200) - pioche.clientHeight)/2 + 'px';
+    var dim = ((size.height-200) - pioche.clientHeight)/2 ;
+    pioche.style.paddingTop = dim + 'px';
+    pioche.style.paddingBottom =dim + 'px';
 }
 
 function PoserCarte(){
