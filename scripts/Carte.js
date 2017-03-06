@@ -1,4 +1,4 @@
-﻿
+
 var idCarteStatic = 0;
 
 function Carte(id, type, val, couleur, idJoueur, cheminImage){
@@ -11,7 +11,7 @@ function Carte(id, type, val, couleur, idJoueur, cheminImage){
 }
 
 function newGalion(val){
-	var g = new Carte(idCarteStatic, "Galion", val, "", -1, "res/cartes/galion/"+val+".png"); //Un truc dans le genre
+	var g = new Carte(idCarteStatic, "Galion", val, "", -1, "res/cartes/galions/"+val+".png"); //Un truc dans le genre
 	idCarteStatic++;
 	return g;
 }
@@ -46,24 +46,24 @@ function creerPaquet(){
 	for(var i = 2; i <= 8; i++){
 		if(i == 2 || i == 4 || i == 5){					//Cinq cartes Galion de valeur 2, 4 et 5
 			for(var j = 1; j <= 5; j++){
-				paquet.push(newGalion(j));
+				paquet.push(newGalion(i));
 			}
 		}
 		
 		if(i == 3){										//Six cartes Galion de valeur 3
 			for(var j = 1; j <= 6; j++){
-				paquet.push(newGalion(j));
+				paquet.push(newGalion(i));
 			}
 		}
 		
 		if(i == 6){										//Deux cartes Galion de valeur 6
 			for(var j = 1; j <= 2; j++){
-				paquet.push(newGalion(j));
+				paquet.push(newGalion(i));
 			}
 		}
 		
 		if(i == 7 || i == 8){							//Une carte Galion de valeur 7 et 8
-			paquet.push(newGalion(j));
+			paquet.push(newGalion(i));
 		}
 	}
 	

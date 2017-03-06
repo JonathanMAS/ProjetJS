@@ -10,7 +10,7 @@ function afficherPaquetsJoueurs(){
 }
 function afficherCartesJoueur(){
     var main = document.getElementById("main");
-    main.style.marginTop = "-150px";
+    main.style.marginBottom = "-150px";
     var nb_cartes= joueurs[0].cartesEnMain.length; // Joueur 0
     var width_cartes = size.width/nb_cartes;
     if(width_cartes>170){
