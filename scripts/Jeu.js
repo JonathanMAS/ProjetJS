@@ -40,10 +40,10 @@ function initPioche(){
  }
 
 function piocherCarte(){
-	var carte = pioche[pioche.length];
-	var mains = joueurs[idJoueurActif].cartesEnMain.length;
-	joueurs[idJoueurActif].cartesEnMain[mains]=pioche[pioche.length];
-	pioche[pioche.length]=null;
+	var carte = pioche[pioche.length-1];
+	//var mains = joueurs[idJoueurActif].cartesEnMain.length;
+	joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
+    pioche.pop();
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
@@ -59,8 +59,8 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 }
 
 function initJeu(){
+    initPioche();
 	initJoueurs();
-	initPioche();
 }
 
 function afficherJeu(){

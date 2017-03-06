@@ -6,6 +6,24 @@ height: document.body.clientHeight
 
 function afficherPaquetsJoueurs(){
     afficherCartesAdversaire();
+    afficherCartesJoueur();
+}
+function afficherCartesJoueur(){
+    var main = document.getElementById("main");
+    main.style.marginTop = "-150px";
+    var nb_cartes= joueurs[0].cartesEnMain.length; // Joueur 0
+    var width_cartes = size.width/nb_cartes;
+    if(width_cartes>170){
+        width_cartes=150;
+    }
+    
+    for(var i=0;i<nb_cartes;i++){
+        var img = document.createElement("img");
+        img.src = joueurs[0].cartesEnMain[i].cheminImage;
+        img.width= width_cartes;
+        img.style.padding = "10px";
+        main.appendChild(img);
+    }
 }
 
 function afficherCartesAdversaire(){
