@@ -10,7 +10,7 @@ function afficherPaquetsJoueurs(){
 
 function afficherCartesAdversaire(){
     var nb_cartes= joueurs[1].cartesEnMain.length;
-    alert(nb_cartes);
+    alert("ok");
 }
 
 function defineFieldGame(){
