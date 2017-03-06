@@ -47,7 +47,7 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-    	var cartes;
+    	var cartes = [];
 	
 	for(var j = 0; j < 2; j++){
         joueurs.push(newJoueur(cartes,null));
@@ -58,7 +58,7 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 }
 
 function initJeu(){
-    initJoueurs();
+	initJoueurs();
 	initPioche();
 }
 
