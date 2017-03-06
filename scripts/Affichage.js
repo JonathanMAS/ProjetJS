@@ -9,8 +9,22 @@ function afficherPaquetsJoueurs(){
 }
 
 function afficherCartesAdversaire(){
-    var nb_cartes= joueurs[1].cartesEnMain.length;
-    alert("ok");
+    var advers = document.getElementById("main_adverse");
+    advers.style.marginTop = "-150px";
+    document.getElementById("center").style.marginTop = "100px";
+    var nb_cartes= joueurs[1].cartesEnMain.length; // IA 1
+    var width_cartes = size.width/nb_cartes;
+    if(width_cartes>170){
+        width_cartes=150;
+    }
+
+    for(var i=0;i<nb_cartes;i++){
+        var img = document.createElement("img");
+        img.src = "res/cartes/carte.png";
+        img.width= width_cartes;
+        img.style.padding = "10px";
+        advers.appendChild(img);
+    }
 }
 
 function defineFieldGame(){
