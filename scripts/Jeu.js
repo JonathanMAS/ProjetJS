@@ -31,13 +31,16 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-
+	var cartes;
+	for (int i=0;i<6;i++){
+	cartes[i]= piocherCarte();
+	}
+	Joueurs[0]=newJoueurs(cartes,null);
 }
 
 function initJeu(){
-	initJoueurs();
 	initPioche();
-
+	initJoueurs();
 }
 
 function afficherJeu(){
