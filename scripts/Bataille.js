@@ -3,8 +3,6 @@ function Bataille(listeCarte, galion){
 	this.listeCarte = listeCarte;
 	this.galion = galion;
 	this.carteByColor = [[], [], [], []]; // rouge vert bleu jaune
-	this.derniereCartePose = galion;
-	this.avantDerniereCartePose = galion;
 	
 	this.ROUGE = 0; //à ne pas modifier
 	this.VERT = 1;
@@ -14,28 +12,40 @@ function Bataille(listeCarte, galion){
 	this.batailleGagnante = function(){ //renvoie l'id du Joueur qui gagne à un instant donné ou -1 si égalité
 		
 		//permet de trier les cartes par joueur pour calculer ses points
-		var joueurs = []; //
-		var cartes = []; //
+		var joueurs = []; //contient les id des joueurs qui ont participés à la bataille dans l'odre de leur couleur
+		var pointsJoueurs = []; //
 		//si la dernière carte la plus forte posée apartient au joueur courant, il gagne la bataille
 		
 		//on cherche un amiral :
 		if(this.listeCarte[0].type == "Amiral"){ 
 			return this.listeCarte[0].idJoueur; //celui qui pose l'amiral est forcément le gagnant
 		} else if(this.listeCarte[0].type == "Capitaine"){
-			if(this.avantDerniereCartePose = this.listeCarte[0].
+			//TODO gérer le cas des capitaines dans Jeu.js
 			return this.listeCarte[0].idJoueur; //TODO à verifier : le dernier capitaine posé est gagnant
 		}else{
 			for(var i=0; i < this.carteByColor.length; i++){ //on compte les points pour chaque joueur
 				if(this.carteByColor[i].length != 0){ //s'il y a au moins une carte de cette couleur
-					joueurs.push(this.carteByColor[i][0].idJoueur);
+					joueurs.push(this.carteByColor[i][0].idJoueur); //on retient quel joueurs ont participé
 					for(var j=0; j < this.carteByColor[i].length; j++){ //pour chaque carte de couleur
-						
+						pointsJoueurs[i] += this.carteByColor[i][j].valeur; //on ajoute le score du joueur
 					}
 
 				}
 			}
+			var joueurGagnant = 0;
+			for(var i=0; i < pointsJoueurs.length; i++){ //on cherche le joueur qui a le plus de points
+				if(pointsJoueurs[i] >= pointsJoueurs[joueurGagnant]){
+					joueurGagnant = i;
+				}
+			}
+			for(var i=0; i < pointsJoueurs.length; i++){ //on cherche si le joueur qui a le plus de points est ex aequo
+				if(pointsJoueurs[i] == pointsJoueurs[joueurGagnant]){
+					return -1;
+				}
+			}
+			return joueurs[joueurGagnant];
+			
 		}
-		
 		
 		
 	}
@@ -82,9 +92,7 @@ function Bataille(listeCarte, galion){
 				return false; //si la couleur qu'on essaie de poser ne nous appartient pas, on ne pose pas la carte
 			}
 		}
-		
-		this.avantDerniereCartePose = this.derniereCartePose;
-		this.derniereCartePose = carte;
+
 		return true;
 	}
 }
