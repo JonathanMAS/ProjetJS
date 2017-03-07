@@ -101,43 +101,67 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 	}
 }
 
-function poserGalion(carte){
-	this.batailles[this.batailles.length] = newBataille(Carte);
+// id de la carte this.id
+function poserGalion(){
+    alert("galion");
+    if(joueurs[idJoueurActif].carteSelectionne.idCarte==this.id){
+        batailles.push(newBataille(Joueurs[idJoueurActif].carteSelectionne));
+        idJoueurActif= 1 - idJoueurActif;
+    }else{
+        alert("ok diff")
+        var carte =null;
+        for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){
+            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==this.id){
+                carte=joueurs[idJoueurActif].cartesEnMain[i];
+            }
+        }
+        if(carte!=null){
+        selectionnerCarte(carte);
+        }
+    }
 }
 
 function poserPirate(bataille, carte){
-	bataille.addCarte(carte);
+    alert("pirate");
+
+	//bataille.addCarte(carte);
+    // add carte on bataille
 }
 
 function poserAmiral(bataille,carte){
-	bataille.addCarte(carte);
+    alert("amiral");
+
+//	bataille.addCarte(carte);
 }
 
-function Capitaine(bataille,carte){
-	bataille.addCarte(carte);
+function poserCapitaine(bataille,carte){
+    alert("capitaine");
+	//bataille.addCarte(carte);
 }
 
-function selectionnerCarte(){
-
+function selectionnerCarte(carte){
+    joueurs[idJoueurActif].carteSelectionne= carte;
+    selectCarte(carte.idCarte);
 }
 
 
-function jouerCarte(){
+function assignCarte(carte){
 	if(carte.type="Galion"){
-		poserGalion(carte);
+		document.getElementById(carte.idCarte).onclick = poserGalion;
 	}
 	if(carte.type="Pirate"){
-		poserPirate(carte);
+        document.getElementById(carte.idCarte).onclick = poserPirate;
 	}
 	if(carte.type="Amiral"){
-		poserAmiral(carte);
+        document.getElementById(carte.idCarte).onclick = poserAmiral;
 	}
 	if(carte.type="Capitaine"){
-		poserCapitaine(carte);
+		document.getElementById(carte.idCarte).onclick = poserCapitaine;
 	}
 }
 
 
-function actionJoueur(){
+
+/*function actionJoueur(){
     // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
-}
+}*/
