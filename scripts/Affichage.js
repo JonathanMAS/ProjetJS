@@ -18,6 +18,19 @@ function removeCarteMainJoueur(id){
     }
 }
 
+function creerNouvelleBataille(object){
+    var fieldGame= document.getElementById("fieldGame");
+    var bataille = document.createElement("div");
+    bataille.className="bataille";
+    bataille.id = object.id;
+    fieldGame.appendChild(bataille);
+    var galion = document.createElement("img");
+    galion.src = object.galion.cheminImage;
+    galion.id =object.galion.idCarte;
+    galion.width= 150;
+    bataille.appendChild(galion);
+}
+
 function afficherCartesJoueur(){
     var main = document.getElementById("main");
     main.style.marginBottom = "-150px";
