@@ -72,5 +72,12 @@ body{
     width: 150px;
 }
 
-
+.bataille{
+    padding: 0px 20px;
+}
+#fieldGame{
+    margin-top : 150px;
+    display:flex;
+    
+}
 

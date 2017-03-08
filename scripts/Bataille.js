@@ -98,7 +98,8 @@ function Bataille(listeCarte, galion){
 }
 
 function newBataille(galion){
-	var b = new Bataille([galion], galion); 
+	var b = new Bataille([galion], galion);
+    creerNouvelleBataille(b);
 	return b;
 }
 
