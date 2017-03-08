@@ -102,8 +102,8 @@ function newBataille(galion){
 	return b;
 }
 
-var bataille = [];
-bataille[i].batailleGagnante();
+//var bataille = [];
+//bataille[i].batailleGagnante();
 
 
 
