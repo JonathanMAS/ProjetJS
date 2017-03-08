@@ -106,8 +106,14 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 function poserGalion(){
     if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==this.id)){
         alert("newBataille");
-        batailles.push(newBataille(Joueurs[idJoueurActif].carteSelectionne));
-        idJoueurActif= 1 - idJoueurActif;
+        batailles.push(newBataille(joueurs[idJoueurActif].carteSelectionne));
+        for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){
+            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==this.id){
+                joueurs[idJoueurActif].cartesEnMain.splice(i,1);
+                removeCarteMainJoueur(this.id);
+            }
+        }
+       // idJoueurActif= 1 - idJoueurActif;
     }else{
         var carte =null;
         for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){

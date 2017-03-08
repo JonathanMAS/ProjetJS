@@ -9,6 +9,15 @@ function afficherPaquetsJoueurs(){
     afficherCartesJoueur();
 }
 
+function removeCarteMainJoueur(id){
+    var main = document.getElementById("main");
+    for(var i=0;i<main.childNodes.length;i++){
+        if(id == main.childNodes[i].id){
+            main.removeChild(main.childNodes[i]);
+        }
+    }
+}
+
 function afficherCartesJoueur(){
     var main = document.getElementById("main");
     main.style.marginBottom = "-150px";
