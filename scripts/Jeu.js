@@ -121,41 +121,55 @@ function poserGalion(){
     }
 }
 
-function poserPirate(bataille, carte){
+function poserPirate(bataille, carte){ //bataille, carte
     alert("pirate");
 
 	//bataille.addCarte(carte);
     // add carte on bataille
 }
 
-function poserAmiral(bataille,carte){
+function poserAmiral(bataille,carte){ //bataille, carte
     alert("amiral");
 
 //	bataille.addCarte(carte);
 }
 
-function poserCapitaine(bataille,carte){
+function poserCapitaine(bataille,carte){ //bataille, carte
     alert("capitaine");
 	//bataille.addCarte(carte);
 }
 
-function selectionnerCarte(carte){
+function selectionnerCarte(carte){ //carte
     joueurs[idJoueurActif].carteSelectionne= carte;
     selectCarte(carte.idCarte);
 }
 
+function findCarte(idCarte){
+	var v = document.getElementsByTagName("img");
+	for(var i=0; i < v.length; i++){
+		
+	}
+}
+
 
 function assignCarte(carte){
-	if(carte.type="Galion"){
+	console.log(carte);
+	
+	var v = document.getElementById(carte.idCarte);
+	v.style.transition = "width 0.5s";
+	v.onmouseover = carteMouseOver;
+	v.onmouseout = carteMouseOut;
+	
+	if(carte.type=="Galion"){
 		document.getElementById(carte.idCarte).onclick = poserGalion;
 	}
-	if(carte.type="Pirate"){
+	if(carte.type=="Pirate"){
         document.getElementById(carte.idCarte).onclick = poserPirate;
 	}
-	if(carte.type="Amiral"){
+	if(carte.type=="Amiral"){
         document.getElementById(carte.idCarte).onclick = poserAmiral;
 	}
-	if(carte.type="Capitaine"){
+	if(carte.type=="Capitaine"){
 		document.getElementById(carte.idCarte).onclick = poserCapitaine;
 	}
 }

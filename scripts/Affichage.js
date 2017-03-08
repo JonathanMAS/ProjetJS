@@ -33,6 +33,13 @@ function selectCarte(id){
     alert("selection de "+id);
 }
 
+function carteMouseOver(evt){
+	document.getElementById(evt.target.id).width = 160;
+}
+function carteMouseOut(evt){
+	document.getElementById(evt.target.id).width = 150;
+}
+
 function afficherCartesAdversaire(){
     var advers = document.getElementById("main_adverse");
     advers.style.marginTop = "-150px";
