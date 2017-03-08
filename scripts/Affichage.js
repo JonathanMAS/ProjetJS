@@ -33,6 +33,7 @@ function afficherCartesJoueur(){
         img.id = joueurs[0].cartesEnMain[i].idCarte;
       //  alert(joueurs[0].cartesEnMain[i].idCarte);
         img.width= width_cartes;
+		img.style.opacity = "0.7";
         img.style.padding = "10px";
         main.appendChild(img);
         assignCarte(joueurs[0].cartesEnMain[i]);
@@ -40,14 +41,18 @@ function afficherCartesJoueur(){
 }
 
 function selectCarte(id){
-    alert("selection de "+id);
+    //alert("selection de "+id);
 }
 
 function carteMouseOver(evt){
-	document.getElementById(evt.target.id).width = 160;
+	var v = document.getElementById(evt.target.id);
+	v.width = 160;
+	v.style.opacity = "1";
 }
 function carteMouseOut(evt){
-	document.getElementById(evt.target.id).width = 150;
+	var v = document.getElementById(evt.target.id);
+	v.width = 150;
+	v.style.opacity = "0.7";
 }
 
 function afficherCartesAdversaire(){
