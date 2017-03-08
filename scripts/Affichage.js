@@ -9,6 +9,15 @@ function afficherPaquetsJoueurs(){
     afficherCartesJoueur();
 }
 
+function removeCarteMainJoueur(id){
+    var main = document.getElementById("main");
+    for(var i=0;i<main.childNodes.length;i++){
+        if(id == main.childNodes[i].id){
+            main.removeChild(main.childNodes[i]);
+        }
+    }
+}
+
 function afficherCartesJoueur(){
     var main = document.getElementById("main");
     main.style.marginBottom = "-150px";
@@ -22,6 +31,7 @@ function afficherCartesJoueur(){
         var img = document.createElement("img");
         img.src = joueurs[0].cartesEnMain[i].cheminImage;
         img.id = joueurs[0].cartesEnMain[i].idCarte;
+      //  alert(joueurs[0].cartesEnMain[i].idCarte);
         img.width= width_cartes;
 		img.style.opacity = "0.7";
         img.style.padding = "10px";
