@@ -1,7 +1,7 @@
 var pioche= [];
 var batailles = [];
 var joueurs = []; //array de joueur, indice 0 c'est nous
-var idJoueurActif =0 ; //celui qui est en train de jouer
+var idJoueurActif = 0 ; //celui qui est en train de jouer
 
 document.body.onload = start;
 document.body.onresize = resize;
@@ -61,6 +61,7 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 function initJeu(){
     initPioche();
 	initJoueurs();
+    idJoueurActif=0;
 }
 
 function afficherJeu(){
@@ -103,12 +104,11 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 
 // id de la carte this.id
 function poserGalion(){
-    alert("galion");
-    if(joueurs[idJoueurActif].carteSelectionne.idCarte==this.id){
+    if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==this.id)){
+        alert("newBataille");
         batailles.push(newBataille(Joueurs[idJoueurActif].carteSelectionne));
         idJoueurActif= 1 - idJoueurActif;
     }else{
-        alert("ok diff")
         var carte =null;
         for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){
             if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==this.id){
@@ -143,13 +143,12 @@ function selectionnerCarte(carte){ //carte
     joueurs[idJoueurActif].carteSelectionne= carte;
     selectCarte(carte.idCarte);
 }
-
-function findCarte(idCarte){
+/*function findCarte(idCarte){
 	var v = document.getElementsByTagName("img");
 	for(var i=0; i < v.length; i++){
 		
 	}
-}
+}*/
 
 
 function assignCarte(carte){
