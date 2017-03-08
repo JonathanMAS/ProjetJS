@@ -113,28 +113,27 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 	}
 }
 
-// id de la carte this.id
-function poserGalion(){
-    if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==this.id)){
+function poserGalion(carte){
+    if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){
         alert("newBataille");
         batailles.push(newBataille(joueurs[idJoueurActif].carteSelectionne));
         for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){
-            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==this.id){
+            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==carte.idCarte){
                 joueurs[idJoueurActif].cartesEnMain.splice(i,1);
-                removeCarteMainJoueur(this.id);
+                removeCarteMainJoueur(carte.idCarte);
             }
         }
        // idJoueurActif= 1 - idJoueurActif;
     }else{
-        var carte =null;
+     /*   var carte_temp =null;
         for(var i=0;i<joueurs[idJoueurActif].cartesEnMain.length;i++){
-            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==this.id){
-                carte=joueurs[idJoueurActif].cartesEnMain[i];
+            if(joueurs[idJoueurActif].cartesEnMain[i].idCarte==carte.idCarte){
+                carte_temp=joueurs[idJoueurActif].cartesEnMain[i];
             }
         }
-        if(carte!=null){
+        if(carte_temp!=null){*/
         selectionnerCarte(carte);
-        }
+      //  }
     }
 }
 
@@ -177,7 +176,7 @@ function poserCarte(evt){
 	console.log(carte);
 	
 	if(carte.type=="Galion"){
-		poserGalion();
+		poserGalion(carte);
 	}
 	if(carte.type=="Pirate"){
         poserPirate();

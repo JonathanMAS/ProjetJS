@@ -41,7 +41,7 @@ function afficherCartesJoueur(){
 }
 
 function selectCarte(id){
-    //alert("selection de "+id);
+    alert("selection de "+id);
 }
 
 function carteMouseOver(evt){
