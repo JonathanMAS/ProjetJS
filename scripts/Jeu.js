@@ -3,6 +3,10 @@ var batailles = [];
 var joueurs = []; //array de joueur, indice 0 c'est nous
 var idJoueurActif =0 ; //celui qui est en train de jouer
 
+//paquets qui doit contenir toutes les cartes du jeu pour pouvoir les référencer. 
+//On ne doit pas enlever ou ajouter de carte à ce paquets ormis lors de l'initialisation
+var staticPaquet = [];
+
 document.body.onload = start;
 document.body.onresize = resize;
 
@@ -36,6 +40,11 @@ function melangerPioche(){
 
 function initPioche(){
   this.pioche= creerPaquet();
+  
+  for(var i=0; i < pioche.length; i++){
+	  staticPaquet.push(pioche[i]);
+  }
+  
   melangerPioche(this.pioche);
  }
 
@@ -43,6 +52,8 @@ function piocherCarte(){
 	var carte = pioche[pioche.length-1];
 	//var mains = joueurs[idJoueurActif].cartesEnMain.length;
 	joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
+	//console.log(joueurs[idJoueurActif].cartesEnMain);
+	pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
     pioche.pop();
 }
 
@@ -145,33 +156,44 @@ function selectionnerCarte(carte){ //carte
 }
 
 function findCarte(idCarte){
-	var v = document.getElementsByTagName("img");
-	for(var i=0; i < v.length; i++){
-		
+	
+	for(var i=0; i < staticPaquet.length; i++){
+		if(staticPaquet[i].idCarte == idCarte){
+			return staticPaquet[i];
+		}
+	}
+	return null;
+}
+
+function poserCarte(evt){
+	//var v = document.getElementById(evt.target.id);
+	var carte = findCarte(evt.target.id)
+	console.log(carte);
+	
+	if(carte.type=="Galion"){
+		poserGalion();
+	}
+	if(carte.type=="Pirate"){
+        poserPirate();
+	}
+	if(carte.type=="Amiral"){
+        poserAmiral();
+	}
+	if(carte.type=="Capitaine"){
+		poserCapitaine();
 	}
 }
 
 
 function assignCarte(carte){
-	console.log(carte);
+	//console.log(carte);
 	
 	var v = document.getElementById(carte.idCarte);
 	v.style.transition = "width 0.5s";
 	v.onmouseover = carteMouseOver;
 	v.onmouseout = carteMouseOut;
 	
-	if(carte.type=="Galion"){
-		document.getElementById(carte.idCarte).onclick = poserGalion;
-	}
-	if(carte.type=="Pirate"){
-        document.getElementById(carte.idCarte).onclick = poserPirate;
-	}
-	if(carte.type=="Amiral"){
-        document.getElementById(carte.idCarte).onclick = poserAmiral;
-	}
-	if(carte.type=="Capitaine"){
-		document.getElementById(carte.idCarte).onclick = poserCapitaine;
-	}
+	v.onclick = poserCarte;
 }
 
 
