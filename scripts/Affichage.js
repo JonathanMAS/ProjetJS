@@ -22,6 +22,7 @@ function afficherCartesJoueur(){
         var img = document.createElement("img");
         img.src = joueurs[0].cartesEnMain[i].cheminImage;
         img.id = joueurs[0].cartesEnMain[i].idCarte;
+      //  alert(joueurs[0].cartesEnMain[i].idCarte);
         img.width= width_cartes;
         img.style.padding = "10px";
         main.appendChild(img);
