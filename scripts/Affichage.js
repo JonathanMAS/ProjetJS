@@ -68,8 +68,12 @@ function afficherCartesAdversaire(){
     for(var i=0;i<nb_cartes;i++){
         var img = document.createElement("img");
         img.src = "res/cartes/carte.png";
+		img.id = joueurs[1].cartesEnMain[i].idCarte;
         img.width= width_cartes;
         img.style.padding = "10px";
+		img.style.transition = "width 0.5s";
+		img.onmouseover = carteMouseOver;
+		img.onmouseout = carteMouseOut;
         advers.appendChild(img);
     }
 }
