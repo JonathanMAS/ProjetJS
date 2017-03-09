@@ -149,6 +149,10 @@ function poserCapitaine(bataille,carte){ //bataille, carte
 }
 
 function selectionnerCarte(carte){ //carte
+	console.log("Carte selected");
+	
+	if(joueurs[idJoueurActif].carteSelectionne != null)
+		unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
     joueurs[idJoueurActif].carteSelectionne= carte;
     selectCarte(carte.idCarte);
 }
@@ -165,7 +169,8 @@ function findCarte(idCarte){
 
 function poserCarte(evt){
 	//var v = document.getElementById(evt.target.id);
-	var carte = findCarte(evt.target.id)
+	var carte = findCarte(evt.target.id);
+	selectionnerCarte(carte);
 	console.log(carte);
 	
 	if(carte.type=="Galion"){

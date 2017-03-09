@@ -55,17 +55,23 @@ function afficherCartesJoueur(){
 
 function selectCarte(id){
     //alert("selection de "+id);
+	//console.log("rergrdsfzgrsf");
+	var v = document.getElementById(id);
+	v.style.opacity = "1";
+}
+function unselectCarte(id){
+    var v = document.getElementById(id);
+	v.style.opacity = "0.5";
 }
 
 function carteMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
 	v.width = 160;
-	v.style.opacity = "1";
+	
 }
 function carteMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
 	v.width = 150;
-	v.style.opacity = "0.7";
 }
 
 function afficherCartesAdversaire(){
