@@ -22,13 +22,14 @@ function creerNouvelleBataille(object){
     var fieldGame= document.getElementById("fieldGame");
     var bataille = document.createElement("div");
     bataille.className="bataille";
-    bataille.id = object.id;
+    bataille.id = object.idBataille;
     fieldGame.appendChild(bataille);
     var galion = document.createElement("img");
     galion.src = object.galion.cheminImage;
     galion.id =object.galion.idCarte;
     galion.width= 150;
     bataille.appendChild(galion);
+    bataille.onClick = PoserCarte;
 }
 
 function afficherCartesJoueur(){
@@ -51,6 +52,10 @@ function afficherCartesJoueur(){
         main.appendChild(img);
         assignCarte(joueurs[0].cartesEnMain[i]);
     }
+}
+
+function addCarteBataille(){
+    
 }
 
 function selectCarte(id){

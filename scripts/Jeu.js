@@ -126,14 +126,18 @@ function poserGalion(carte){
        // idJoueurActif= 1 - idJoueurActif;
     }else{
         selectionnerCarte(carte);
-        
     }
 }
 
-function poserPirate(bataille, carte){ //bataille, carte
-    alert("pirate");
-
-	//bataille.addCarte(carte);
+function poserPirate(carte){ //bataille, carte
+    //alert("pirate");
+    if(Bataille == typeof carte){
+        alert(carte);
+        carte.addCarte(this.carteSelectionne);
+    }else{
+        alert(typeof carte);
+        selectionnerCarte(carte);
+    }
     // add carte on bataille
 }
 
@@ -167,12 +171,11 @@ function poserCarte(evt){
 	//var v = document.getElementById(evt.target.id);
 	var carte = findCarte(evt.target.id)
 	console.log(carte);
-	
 	if(carte.type=="Galion"){
 		poserGalion(carte);
 	}
 	if(carte.type=="Pirate"){
-        poserPirate();
+        poserPirate(carte);
 	}
 	if(carte.type=="Amiral"){
         poserAmiral();
@@ -190,7 +193,6 @@ function assignCarte(carte){
 	v.style.transition = "width 0.5s";
 	v.onmouseover = carteMouseOver;
 	v.onmouseout = carteMouseOut;
-	
 	v.onclick = poserCarte;
 }
 

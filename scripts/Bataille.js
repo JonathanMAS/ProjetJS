@@ -1,5 +1,7 @@
-﻿
-function Bataille(listeCarte, galion){
+﻿var idBatailleStatic = 0;
+
+function Bataille(id, listeCarte, galion){
+    this.idBataille = id;
 	this.listeCarte = listeCarte;
 	this.galion = galion;
 	this.carteByColor = [[], [], [], []]; // rouge vert bleu jaune
@@ -98,7 +100,8 @@ function Bataille(listeCarte, galion){
 }
 
 function newBataille(galion){
-	var b = new Bataille([galion], galion);
+	var b = new Bataille("Bataille_"+idBatailleStatic,[galion], galion);
+    idBatailleStatic++;
     creerNouvelleBataille(b);
 	return b;
 }
