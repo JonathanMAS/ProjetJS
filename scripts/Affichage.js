@@ -82,11 +82,14 @@ function carteMouseOut(evt){
 function piocheMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
 	v.style.opacity = "1";
+	v.style.border = "solid 1px";
+	v.style.borderRadius = "8px";
 	console.log(findCarte(evt.target.id));
 }
 function piocheMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
 	v.style.opacity = "0.85";
+	v.style.borderRadius = "8px";
 }
 
 function afficherCartesAdversaire(){
