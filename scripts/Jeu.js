@@ -39,13 +39,17 @@ function melangerPioche(){
 
 
 function initPioche(){
-  this.pioche= creerPaquet();
+	var v = document.getElementById("piocheImg");
+	this.pioche= creerPaquet();
   
-  for(var i=0; i < pioche.length; i++){
-	  staticPaquet.push(pioche[i]);
-  }
+	for(var i=0; i < pioche.length; i++){
+		staticPaquet.push(pioche[i]);
+	}
   
-  melangerPioche(this.pioche);
+	melangerPioche(this.pioche);
+	v.onclick = piocherCarte;
+	v.onmouseover = piocheMouseOver;
+	v.onmouseout = piocheMouseOut;
  }
 
 function piocherCarte(){

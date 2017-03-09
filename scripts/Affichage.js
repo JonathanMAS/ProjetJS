@@ -72,11 +72,21 @@ function unselectCarte(id){
 function carteMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
 	v.width = 160;
-	
+	console.log(findCarte(evt.target.id));
 }
 function carteMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
 	v.width = 150;
+}
+
+function piocheMouseOver(evt){
+	var v = document.getElementById(evt.target.id);
+	v.style.opacity = "1";
+	console.log(findCarte(evt.target.id));
+}
+function piocheMouseOut(evt){
+	var v = document.getElementById(evt.target.id);
+	v.style.opacity = "0.85";
 }
 
 function afficherCartesAdversaire(){
