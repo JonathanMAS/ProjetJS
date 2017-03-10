@@ -125,17 +125,15 @@ function poserGalion(carte){
         //alert("newBataille");
 		var j =joueurs[idJoueurActif];
         batailles.push(newBataille(j.carteSelectionne)); //on crée une battaille dont le galion selectionnée est donné
-        for(var i=0;i<j.cartesEnMain.length;i++){ //pour chaque carte
-            if(j.cartesEnMain[i].idCarte==carte.idCarte){ //on cherche le galion selectionné
-				var v = document.getElementById(j.cartesEnMain[i].idCarte);
-				v.onclick = poserPirate;
-				v.onmouseover = carteMouseOver;
-				v.onmouseout = carteMouseOut;
-				
-                j.cartesEnMain.splice(i,1); //on le supprime de la main
-                removeCarteMainJoueur(carte.idCarte); // et de l'affichage
-            }
-        }
+
+		var v = document.getElementById(carte.idCarte);
+		v.onclick = poserPirate;
+		v.onmouseover = carteMouseOver;
+		v.onmouseout = carteMouseOut;
+		
+		j.supprimerCarteEnMain(carte.idCarte);
+		removeCarteMainJoueur(carte.idCarte);
+		
        // idJoueurActif= 1 - idJoueurActif;
     }else{
         selectionnerCarte(carte);
@@ -147,11 +145,18 @@ function poserPirate(carte){ //bataille, carte
 	
 	//TODO verifier que la carte selectionnée est bien un pirate et que le galion de la bataille existe bien 
 	var j =joueurs[idJoueurActif];
-	console.log(j.carteSelectionne);
+	var idGalion = carte.target.id;
+	
 	if(j.carteSelectionne.type == "Pirate"){
 		//alert("pouet");
-		
-		
+		var b = findBataille(idGalion);
+		console.log("Tentatives de posage de pirate : ");
+		if(b.addCarte(carte)){ //si on a réussi à ajouter la carte
+			j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
+			removeCarteMainJoueur(j.carteSelectionne.idCarte);
+		} else { //si on a pas réussi à ajouter la carte
+			console.log("Echec de posage de carte sur bataille");
+		}
 		
 	}
 	
@@ -184,6 +189,15 @@ function findCarte(idCarte){
 	for(var i=0; i < staticPaquet.length; i++){
 		if(staticPaquet[i].idCarte == idCarte){
 			return staticPaquet[i];
+		}
+	}
+	return null;
+}
+
+function findBataille(idGalion){
+		for(var i=0; i < batailles.length; i++){
+			if(batailles[i].galion.idCarte == idGalion){
+				return batailles[i];
 		}
 	}
 	return null;

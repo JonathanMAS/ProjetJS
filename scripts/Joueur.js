@@ -23,6 +23,16 @@ function Joueur(idJoueur, pseudo, cartesEnMain, carteSelectionne, bataillesGagne
 		cartesEnMain.push(carte);
 	}
 	
+	this.supprimerCarteEnMain = function(idCarte){
+		for(var i=0; i < this.cartesEnMain.length; i++){
+			if(this.cartesEnMain[i].idCarte == idCarte){
+				this.cartesEnMain.splice(i,1); //on le supprime de la main
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	this.poser = function(carte){
 		//TODO
