@@ -84,14 +84,14 @@ function carteMouseOut(evt){
 function piocheMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
 	v.style.opacity = "1";
-	v.style.border = "solid 1px";
-	v.style.borderRadius = "8px";
+	//v.style.border = "solid 1px";
+	//v.style.borderRadius = "8px";
 	console.log(findCarte(evt.target.id));
 }
 function piocheMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
 	v.style.opacity = "0.85";
-	v.style.borderRadius = "8px";
+	//v.style.borderRadius = "8px";
 }
 
 function defineFieldGame(){
@@ -101,9 +101,10 @@ function defineFieldGame(){
 
 function afficherPioche(){
     var pioche = document.getElementById("pioche");
-    var dim = ((size.height-200) - pioche.clientHeight)/2 ;
-    pioche.style.paddingTop = dim + 'px';
-    pioche.style.paddingBottom =dim + 'px';
+    var dim = ((size.height-300) - pioche.clientHeight)/2 ;
+    var fieldPioche = document.getElementById("fieldPiocheScore");
+    fieldPioche.style.paddingTop = dim + 'px';
+    fieldPioche.style.paddingBottom =dim + 'px';
 }
 
 
