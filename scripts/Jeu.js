@@ -131,6 +131,8 @@ function poserGalion(carte){
 		v.onmouseout = carteMouseOut;
 		
 		unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
+		
+		v.style.opacity = "1";
 		//alert(j.supprimerCarteEnMain(carte.idCarte));
 		removeCarteMainJoueur(carte.idCarte);
 		joueurs[idJoueurActif].carteSelectionne = null;
