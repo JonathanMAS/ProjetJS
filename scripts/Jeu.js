@@ -99,7 +99,6 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en
 }
 
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-	alert("JoueurSuivant");
 	if(idJoueurActif==joueurs[0].idJoueur){ //on switch de joueur
 		idJoueurActif=joueurs[1].idJoueur;
 		if(joueurs[idJoueurActif].IA != null){ //si le joueur actuel est une IA
@@ -145,12 +144,11 @@ function poserGalion(carte){
 		
 		unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
 		
-		v.style.opacity = "1";
 		//alert(j.supprimerCarteEnMain(carte.idCarte));
 		removeCarteMainJoueur(carte.idCarte);
 		joueurs[idJoueurActif].carteSelectionne = null;
        // idJoueurActif= 1 - idJoueurActif;
-	   
+        v.style.opacity = "1";
 	   return true;
     }else{
         selectionnerCarte(carte);
@@ -173,8 +171,7 @@ function poserPirate(event){ //bataille, carte
 			j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
-			
-			v.style.opacity = "1"; //on redéfinit l'opacité
+            v.style.opacity = "1";
 			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
@@ -235,7 +232,6 @@ function poserCarte(evt){
 		console.log(carte);
 	} else{
 		var isCartePlayed = false;
-		alert(isCartePlayed);
 		if(carte.type=="Galion"){
 			isCartePlayed = poserGalion(carte);
 		}
@@ -252,7 +248,6 @@ function poserCarte(evt){
 		if(isCartePlayed){
 			nextFunction(finDeTour);
 		}
-		alert(isCartePlayed);
 	}
 	
 

@@ -4,7 +4,6 @@ height: document.body.clientHeight
 };
 
 
-
 function removeCarteMainJoueur(id){
     var main = document.getElementById("main");
     for(var i=0;i<main.childNodes.length;i++){
@@ -52,23 +51,30 @@ function creerNouvelleBataille(object){
     galion.src = object.galion.cheminImage;
     galion.id =object.galion.idCarte;
     galion.width= 150;
+    galion.style.zIndex = "999";
+    galion.style.position = "relative";
     bataille.appendChild(galion);
     bataille.onClick = poserCarte;
 }
 
 
 function ajouterAffichageCarteBataille(bataille,carte){
-    var bataille = document.getElementById(bataille.idBataille);
+    var bataille_div = document.getElementById(bataille.idBataille);
     var img = document.createElement("img");
     img.src = carte.cheminImage;
     img.id = carte.idCarte;
     img.width=150;
     img.style.opacity = "0.7";
-    img.style.padding = "10px";
+    img.style.position = "relative";
+    img.style.opacity = "1";
+    img.style.zIndex= 999 - bataille.listeCarte.length;
+
     if(carte.idJoueur==0){
-        bataille.appendChild(img);
+        img.style.marginLeft = "-90px";
+        bataille_div.appendChild(img);
     }else{
-        bataille.insertBefore(img, bataille.firstChild);
+        img.style.marginRight = "-90px";
+        bataille_div.insertBefore(img, bataille.firstChild);
     }
 }
 
