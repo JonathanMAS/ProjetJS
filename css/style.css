@@ -85,6 +85,6 @@ body{
 #fieldGame{
     margin-top : 150px;
     display:flex;
-    
+    overflow-x: scroll;
 }
 
