@@ -57,9 +57,21 @@ function creerNouvelleBataille(object){
 }
 
 
-function addCarteBataille(){
-    
+function ajouterAffichageCarteBataille(bataille,carte){
+    var bataille = document.getElementById(bataille.idBataille);
+    var img = document.createElement("img");
+    img.src = carte.cheminImage;
+    img.id = carte.idCarte;
+    img.width=150;
+    img.style.opacity = "0.7";
+    img.style.padding = "10px";
+    if(carte.idJoueur==0){
+        bataille.appendChild(img);
+    }else{
+        bataille.insertBefore(img, bataille.firstChild);
+    }
 }
+
 
 function selectCarte(id){
 	var v = document.getElementById(id);

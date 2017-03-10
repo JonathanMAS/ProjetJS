@@ -90,6 +90,7 @@ function Bataille(id, listeCarte, galion){
             } else if(carte.type == "Amiral"){
                 this.listeCarte.unshift(carte); //on ajoute la carte
             } else { //carte générale
+                ajouterAffichageCarteBataille(this,carte);
                 this.listeCarte.push(carte); //on ajoute la carte en fin
                 this.carteByColor[idTas].push(carte); //on ajoute la carte en fin
             }
