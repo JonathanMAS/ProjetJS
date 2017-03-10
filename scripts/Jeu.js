@@ -55,6 +55,10 @@ function piocherCarte(){
 	
     var carte = pioche[pioche.length-1];
     
+	//console.log(joueurs);
+	//console.log(idJoueurActif);
+	//console.log(pioche);
+	
     joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
     pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
     
@@ -64,11 +68,12 @@ function piocherCarte(){
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-    	
+		
 	var ia = [null, newIA_easy(joueurs[1])];
 	for(var j = 0; j < 2; j++){
 		idJoueurActif = j;
         joueurs.push(newJoueur([], null, ia[j]));
+		//sleep(900);
 		for (var i=0;i<6;i++){
 			piocherCarte();
 		}
@@ -77,7 +82,7 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 
 function initJeu(){
     initPioche();
-	initJoueurs();
+	setTimeout(initJoueurs, 1500);
     idJoueurActif=0;
 }
 
@@ -227,7 +232,7 @@ function poserCarte(evt){
 		console.log(carte);
 	} else{
 		var isCartePlayed = false;
-
+		alert(isCartePlayed);
 		if(carte.type=="Galion"){
 			isCartePlayed = poserGalion(carte);
 		}
@@ -262,9 +267,17 @@ function assignCarte(carte){
 }
 
 function nextFunction(funct){
-	setTimeout(funct, 100);
+	setTimeout(funct, 750);
 }
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 /*function actionJoueur(){
     // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
 }*/
