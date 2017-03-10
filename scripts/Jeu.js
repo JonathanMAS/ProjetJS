@@ -174,7 +174,7 @@ function poserPirate(event){ //bataille, carte
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
 			
-			v.style.opacity = "1";
+			v.style.opacity = "1"; //on redéfinit l'opacité
 			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
