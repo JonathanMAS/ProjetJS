@@ -55,8 +55,15 @@ body{
     position:absolute;
     top: 99%;
     margin-top: -100px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
+#main{
+    width: 10000px;
+    display:inline;
+}
 #center{
     display:flex;
 }
