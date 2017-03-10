@@ -65,10 +65,10 @@ function piocherCarte(){
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
     	
-	
+	var ia = [null, newIA_easy(joueurs[1])];
 	for(var j = 0; j < 2; j++){
 		idJoueurActif = j;
-        	joueurs.push(newJoueur([], null));
+        joueurs.push(newJoueur([], null, ia[j]));
 		for (var i=0;i<6;i++){
 			piocherCarte();
 		}
@@ -94,21 +94,26 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en
 }
 
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-	if(idJoueurActif==joueurs[0].idJoueur){
+	alert("JoueurSuivant");
+	if(idJoueurActif==joueurs[0].idJoueur){ //on switch de joueur
 		idJoueurActif=joueurs[1].idJoueur;
-	}else{
+		if(joueurs[idJoueurActif].IA != null){ //si le joueur actuel est une IA
+			joueurs[idJoueurActif].IA.play(); // on laisse l'IA jouer
+		}
+	}else{ //si on a atteind le dernier joueur
 		finDeTourDeJeu();
 	}
 }
 
-
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
-	if(isPartieFinie()){
+	if(isPartieFinie()){ //
 		afficheFinPartie();					//Une fonction pour finir le jeu?
 	}else{
-		idJoueurActif=joueurs[0].idJoueur;
+		idJoueurActif=joueurs[0].idJoueur; // on recommence par le premier joueur
 	}
 }
+
+
 
 function bataillesGagnantes(){ // met à jour chacune des batailles
 	for(var i=0; this.batailles<this.batailles.length; i++){
@@ -118,6 +123,8 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 		}
 	}
 }
+
+
 
 function poserGalion(carte){
     if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){ //si une carte est selectionnée
@@ -137,8 +144,11 @@ function poserGalion(carte){
 		removeCarteMainJoueur(carte.idCarte);
 		joueurs[idJoueurActif].carteSelectionne = null;
        // idJoueurActif= 1 - idJoueurActif;
+	   
+	   return true;
     }else{
         selectionnerCarte(carte);
+		return false;
     }
 }
 
@@ -158,26 +168,28 @@ function poserPirate(carte){ //bataille, carte
 			j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
+			
+			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
+			return false;
 		}
-		
 	}
 	
-	
+	return false;
     // add carte on bataille
 }
 
 function poserAmiral(bataille,carte){ //bataille, carte
     //alert("amiral");
-
-//	bataille.addCarte(carte);
+	return false; //l'amiral n'as pas été posé
 }
 
 function poserCapitaine(bataille,carte){ //bataille, carte
     //alert("capitaine");
-	//bataille.addCarte(carte);
+	return false; //le capitaine n'as pas été posé
 }
+
 
 function selectionnerCarte(carte){ //carte
 	console.log("Carte selected");
@@ -187,6 +199,7 @@ function selectionnerCarte(carte){ //carte
     joueurs[idJoueurActif].carteSelectionne= carte;
     selectCarte(carte.idCarte);
 }
+
 
 function findCarte(idCarte){
 	
@@ -215,18 +228,24 @@ function poserCarte(evt){
 		selectionnerCarte(carte);
 		console.log(carte);
 	} else{
+		var isCartePlayed = false;
 		if(carte.type=="Galion"){
-			poserGalion(carte);
+			isCartePlayed = poserGalion(carte);
 		}
-		if(carte.type=="Pirate"){
-			poserPirate(carte);
+		else if(carte.type=="Pirate"){
+			isCartePlayed = poserPirate(carte);
 		}
-		if(carte.type=="Amiral"){
-			poserAmiral();
+		else if(carte.type=="Amiral"){
+			isCartePlayed = poserAmiral();
 		}
-		if(carte.type=="Capitaine"){
-			poserCapitaine();
+		else if(carte.type=="Capitaine"){
+			isCartePlayed = poserCapitaine();
 		}
+		
+		if(isCartePlayed){
+			nextFunction(finDeTour);
+		}
+		alert(isCartePlayed);
 	}
 	
 
@@ -243,7 +262,9 @@ function assignCarte(carte){
 	v.onclick = poserCarte;
 }
 
-
+function nextFunction(funct){
+	setTimeout(funct, 100);
+}
 
 /*function actionJoueur(){
     // piocher, selectionnerCarte, jouerCarte; appel finDeTour()
