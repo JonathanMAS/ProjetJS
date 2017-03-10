@@ -118,11 +118,21 @@ function defineFieldGame(){
 }
 
 function afficherPioche(){
-    var pioche = document.getElementById("pioche");
-    var dim = ((size.height-300) - pioche.clientHeight)/2 ;
-    var fieldPioche = document.getElementById("fieldPiocheScore");
-    fieldPioche.style.paddingTop = dim + 'px';
-    fieldPioche.style.paddingBottom =dim + 'px';
+	
+	if(pioche.length == 0){
+		clearPioche();
+	} else {
+		    var piochee = document.getElementById("pioche");
+			var dim = ((size.height-300) - piochee.clientHeight)/2 ;
+			var fieldPioche = document.getElementById("fieldPiocheScore");
+			fieldPioche.style.paddingTop = dim + 'px';
+			fieldPioche.style.paddingBottom =dim + 'px';
+	}
+}
+
+function clearPioche(){
+	var v = document.getElementById("piocheImg");
+	v.href = "";
 }
 
 

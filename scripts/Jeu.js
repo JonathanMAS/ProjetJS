@@ -29,7 +29,7 @@ function melangerPioche(){
     var place = 0;
     var constante;
     for(var i = 0; i < pioche.length; i++){
-        place = alea(0, pioche.length);
+        place = alea(0, pioche.length-1);
         constante = pioche[i];
         pioche[i] = pioche[place];
         pioche[place] = constante;
@@ -46,24 +46,30 @@ function initPioche(){
     }
     
     melangerPioche(this.pioche);
+	//console.log(pioche);
     v.onclick = piocherCarte;
     v.onmouseover = piocheMouseOver;
     v.onmouseout = piocheMouseOut;
 }
 
 function piocherCarte(){
+    if(pioche.length == 0){
+		clearPioche();
+	} else {
+		//console.log(pioche);
+		var carte = pioche[pioche.length-1];
     
-    var carte = pioche[pioche.length-1];
+		joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
+		pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
     
-    joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
-    pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
-    
-    pioche.pop();
-
-	AffichagePiocherCarte(carte);
+		pioche.pop();
 	
-	nextFunction(finDeTour);
 
+		AffichagePiocherCarte(carte);
+	
+		nextFunction(finDeTour);
+	}
+	
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
@@ -81,7 +87,7 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
 
 function initJeu(){
     initPioche();
-    setTimeout(initJoueurs, 1500);
+    initJoueurs();
     idJoueurActif=0;
 }
 
