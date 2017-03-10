@@ -92,7 +92,7 @@ function carteMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
 	v.style.transition = "width 0.5s";
 	v.width = 160;
-	console.log(findCarte(evt.target.id));
+	//console.log(findCarte(evt.target.id));
 }
 function carteMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
