@@ -167,11 +167,14 @@ function poserPirate(event){ //bataille, carte
 		var b = findBataille(idGalion);
 		console.log("Tentatives de posage de pirate : ");
 		if(b.addCarte(j.carteSelectionne)){ //si on a réussi à ajouter la carte
+			var v = document.getElementById(joueurs[idJoueurActif].carteSelectionne.idCarte);
+			
 			unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
 			j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
 			
+			v.style.opacity = "1";
 			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
