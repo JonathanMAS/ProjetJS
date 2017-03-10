@@ -54,18 +54,14 @@ function initPioche(){
 
 function piocherCarte(){
 	
-	var carte = pioche[pioche.length-1];
-	var j = joueurs[idJoueurActif];
-	var cem = j.cartesEnMain;
-	var carte = pioche[pioche.length-1];
-	
-	//var mains = joueurs[idJoueurActif].cartesEnMain.length;
-	cem.push(carte);
-	
-	carte.idJoueur = j.idJoueur;
+    var carte = pioche[pioche.length-1];
+    
+    joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
+    pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
+    
     pioche.pop();
-	
-	PiocherCarte(carte);
+
+	AffichagePiocherCarte(carte);
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
