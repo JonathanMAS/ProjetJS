@@ -19,7 +19,6 @@ function start(){
     defineFieldGame();
     afficherPioche();
     initJeu();
-    afficherPaquetsJoueurs();
 }
 function resize(){
     afficherPioche();
@@ -131,9 +130,10 @@ function poserGalion(carte){
 		v.onmouseover = carteMouseOver;
 		v.onmouseout = carteMouseOut;
 		
-		j.supprimerCarteEnMain(carte.idCarte);
+		unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
+		alert(j.supprimerCarteEnMain(carte.idCarte));
 		removeCarteMainJoueur(carte.idCarte);
-		
+		joueurs[idJoueurActif].carteSelectionne = null;
        // idJoueurActif= 1 - idJoueurActif;
     }else{
         selectionnerCarte(carte);
@@ -152,8 +152,10 @@ function poserPirate(carte){ //bataille, carte
 		var b = findBataille(idGalion);
 		console.log("Tentatives de posage de pirate : ");
 		if(b.addCarte(carte)){ //si on a réussi à ajouter la carte
+			unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
 			j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
+			joueurs[idJoueurActif].carteSelectionne = null;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
 		}
