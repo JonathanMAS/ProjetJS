@@ -89,6 +89,10 @@ function afficherJeu(){
     
 }
 
+function afficheFinPartie(){
+	alert("BRAVO ! Vous avez PER - DU ! M'en fiche, c'est moi l'boss, je décide que tu as perdu, MOUHAHAHAHAHAHAHAHAHAHAHA *Rire qui n'en finis plus* !");
+}
+
 function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en main
     if(pioche.size==0 && (joueurs[0].cartesEnMain==null||joueurs[1].cartesEnMain==null)){
         return true;
