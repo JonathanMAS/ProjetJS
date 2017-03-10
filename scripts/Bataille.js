@@ -56,6 +56,8 @@ function Bataille(id, listeCarte, galion){
 	this.addCarte = function(carte){ //retourn true si la carte a bien été posée
 		//verifier si le joueur n'as pas déjà posé une carte avec une couleur différente
 		var idTas = 0; //on définis id du tas à modifier en fonction de la couleur
+		carte = joueurs[idJoueurActif].carteSelectionne;
+		
 		if(carte.couleur == "rouge"){
 			idTas = this.ROUGE;
 		} else if(carte.couleur == "vert"){
@@ -65,7 +67,8 @@ function Bataille(id, listeCarte, galion){
 		} else if(carte.couleur == "jaune"){
 			idTas = this.JAUNE;
 		}
-		
+		console.log("TAS MERE");
+		console.log(this.carteByColor);
 		if(this.carteByColor[idTas].length == 0){ //si la couleur n'est pas utilisée 
 		
 			if(carte.type == "Capitaine"){
@@ -79,6 +82,10 @@ function Bataille(id, listeCarte, galion){
 			}
 			
 		} else { //sinon, si la couleur appartient à un joueur
+			//alert("INTERDIT ! NIKE TA MAMAN !");
+			console.log("TESTu = ");
+			console.log(this.carteByColor[idTas][0].idJoueur);
+			
 			if(this.carteByColor[idTas][0].idJoueur == carte.idJoueur){ //et que c'est le joueur actuel
 				
 				if(carte.type == "Capitaine"){
@@ -91,6 +98,7 @@ function Bataille(id, listeCarte, galion){
 					this.carteByColor[idTas].push(carte); //on ajoute la carte en fin
 				}
 			} else {
+				//alert("C'est MA couleur");
 				return false; //si la couleur qu'on essaie de poser ne nous appartient pas, on ne pose pas la carte
 			}
 		}
