@@ -193,6 +193,39 @@ function poserCapitaine(bataille,carte){ //bataille, carte
 	return false; //le capitaine n'as pas été posé
 }
 
+function poserCarte(evt){
+	//var v = document.getElementById(evt.target.id);
+	var carte = findCarte(evt.target.id);
+	var j =joueurs[idJoueurActif];
+	if(j.carteSelectionne != carte){
+		selectionnerCarte(carte);
+		console.log(carte);
+	} else{
+		var isCartePlayed = false;
+		console.log("Carte jouée ? ");
+		
+		if(carte.type=="Galion"){
+			isCartePlayed = poserGalion(carte);
+		}
+		else if(carte.type=="Pirate"){
+			var objet = {target : {id : carte.idCarte}};
+			isCartePlayed = poserPirate();
+		}
+		else if(carte.type=="Amiral"){
+			isCartePlayed = poserAmiral();
+		}
+		else if(carte.type=="Capitaine"){
+			isCartePlayed = poserCapitaine();
+		}
+		console.log(isCartePlayed);
+		if(isCartePlayed){
+			nextFunction(finDeTour);
+		}
+	}
+	
+
+}
+
 
 function selectionnerCarte(carte){ //carte
 	console.log("Carte selected");
@@ -223,35 +256,6 @@ function findBataille(idGalion){
 	return null;
 }
 
-function poserCarte(evt){
-	//var v = document.getElementById(evt.target.id);
-	var carte = findCarte(evt.target.id);
-	var j =joueurs[idJoueurActif];
-	if(j.carteSelectionne != carte){
-		selectionnerCarte(carte);
-		console.log(carte);
-	} else{
-		var isCartePlayed = false;
-		if(carte.type=="Galion"){
-			isCartePlayed = poserGalion(carte);
-		}
-		else if(carte.type=="Pirate"){
-			isCartePlayed = poserPirate(carte);
-		}
-		else if(carte.type=="Amiral"){
-			isCartePlayed = poserAmiral();
-		}
-		else if(carte.type=="Capitaine"){
-			isCartePlayed = poserCapitaine();
-		}
-		
-		if(isCartePlayed){
-			nextFunction(finDeTour);
-		}
-	}
-	
-
-}
 
 
 function assignCarte(carte){
