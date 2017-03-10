@@ -98,19 +98,25 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en
 }
 
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-    alert("fin de tour");
+    
+   // alert("fin de tour");
     idJoueurActif=1-idJoueurActif;
-    if(joueurs[idJoueurActif].IA != null){ //si le joueur actuel est une IA
-        joueurs[idJoueurActif].IA.play(); // on laisse l'IA jouer
-    }
-    if(idJoueurActif==1){ //on a fait un tour
+    //if(idJoueurActif==1){
+     //   piocherCarte();
+    //}else{
+       // finDeTourDeJeu();
+    //}
+ //   if(joueurs[idJoueurActif].IA != null){ //si le joueur actuel est une IA
+  //      joueurs[idJoueurActif].IA.play(); // on laisse l'IA jouer
+   // }
+ /*   if(idJoueurActif==1){ //on a fait un tour
         finDeTourDeJeu();
-    }
+    }*/
 }
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
     alert("fin de tour de jeu");
-    
+
     if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
     }
