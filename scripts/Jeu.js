@@ -172,6 +172,7 @@ function poserPirate(event){ //bataille, carte
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
             v.style.opacity = "1";
+			console.log("Je viens de poser un PIIIRATE !");
 			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
@@ -209,7 +210,9 @@ function poserCarte(evt){
 		}
 		else if(carte.type=="Pirate"){
 			var objet = {target : {id : carte.idCarte}};
-			isCartePlayed = poserPirate();
+			console.log("Je viens de poser un pirate ?");
+			isCartePlayed = poserPirate(objet);
+			console.log("Pirate = "+isCartePlayed);
 		}
 		else if(carte.type=="Amiral"){
 			isCartePlayed = poserAmiral();
