@@ -14,7 +14,7 @@ function IA(id, difficulty, delayActions, joueur){
 }
 
 function newIA_easy(joueur){
-	var ia = new IA(idIaStatic, 1, 750, joueur); //Un truc dans le genre
+	var ia = new IA(idIaStatic, 1, 200, joueur); //Un truc dans le genre
 	idIaStatic++;
 	return ia;
 }
