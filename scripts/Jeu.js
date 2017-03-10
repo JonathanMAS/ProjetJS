@@ -59,8 +59,11 @@ function piocherCarte(){
     pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
     
     pioche.pop();
-    
-    AffichagePiocherCarte(carte);
+
+	AffichagePiocherCarte(carte);
+	
+	nextFunction(finDeTour);
+
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
@@ -178,8 +181,6 @@ function poserPirate(event){ //bataille, carte
         }
     }
     nextFunction(finDeTour);
-    
-    // add carte on bataille
 }
 
 function poserAmiral(bataille,carte){ //bataille, carte
@@ -263,7 +264,7 @@ function assignCarte(carte){
 }
 
 function nextFunction(funct){
-    setTimeout(funct, 750);
+	setTimeout(funct, 50);
 }
 
 function sleep(milliseconds) {
