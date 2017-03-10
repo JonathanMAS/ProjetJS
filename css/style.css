@@ -69,9 +69,8 @@ body{
 }
 
 #pioche{
-    height: 100%;
-    padding-right: 70px;
-    padding-left: 30px;
+    padding-right: 50px;
+    padding-left: 50px;
    /* border: 2px solid black; /* debug */
 }
 
@@ -88,3 +87,13 @@ body{
     overflow-x: scroll;
 }
 
+#fieldPiocheScore p {
+    padding: 8px;
+    margin:0;
+    font-size: 72px;
+    font-family: "Pirate";
+}
+
+#score_joueur{
+    color: #E5C100;
+}
