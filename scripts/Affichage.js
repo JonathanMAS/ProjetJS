@@ -71,12 +71,26 @@ function unselectCarte(id){
 
 function carteMouseOver(evt){
 	var v = document.getElementById(evt.target.id);
+	v.style.transition = "width 0.5s";
 	v.width = 160;
-	
+	console.log(findCarte(evt.target.id));
 }
 function carteMouseOut(evt){
 	var v = document.getElementById(evt.target.id);
 	v.width = 150;
+}
+
+function piocheMouseOver(evt){
+	var v = document.getElementById(evt.target.id);
+	v.style.opacity = "1";
+	v.style.border = "solid 1px";
+	v.style.borderRadius = "8px";
+	console.log(findCarte(evt.target.id));
+}
+function piocheMouseOut(evt){
+	var v = document.getElementById(evt.target.id);
+	v.style.opacity = "0.85";
+	v.style.borderRadius = "8px";
 }
 
 function afficherCartesAdversaire(){
@@ -114,9 +128,9 @@ function afficherPioche(){
     pioche.style.paddingBottom =dim + 'px';
 }
 
-function PoserCarte(){
+function PoserCarte(carte){
     //afficher pioche (+ animation...)
 }
-function PiocherCarte(){
+function PiocherCarte(carte){
     //afficher pioche (+ animation...)
 }
