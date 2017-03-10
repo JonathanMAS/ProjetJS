@@ -53,7 +53,7 @@ function creerNouvelleBataille(object){
     galion.id =object.galion.idCarte;
     galion.width= 150;
     bataille.appendChild(galion);
-    bataille.onClick = PoserCarte;
+    bataille.onClick = poserCarte;
 }
 
 
