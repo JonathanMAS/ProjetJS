@@ -65,6 +65,8 @@ function piocherCarte(){
     pioche.pop();
 
 	AffichagePiocherCarte(carte);
+	
+	nextFunction(finDeTour);
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
@@ -172,7 +174,7 @@ function poserPirate(event){ //bataille, carte
 			removeCarteMainJoueur(j.carteSelectionne.idCarte);
 			joueurs[idJoueurActif].carteSelectionne = null;
             v.style.opacity = "1";
-			console.log("Je viens de poser un PIIIRATE !");
+			nextFunction(finDeTour);
 			return true;
 		} else { //si on a pas réussi à ajouter la carte
 			console.log("Echec de posage de carte sur bataille");
@@ -272,7 +274,7 @@ function assignCarte(carte){
 }
 
 function nextFunction(funct){
-	setTimeout(funct, 750);
+	setTimeout(funct, 50);
 }
 
 function sleep(milliseconds) {

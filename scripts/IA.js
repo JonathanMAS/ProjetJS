@@ -6,7 +6,7 @@ function IA(id, difficulty, delayActions, joueur){
 	this.difficulty= difficulty; //un chiffre
 	this.delayActions = delayActions; //setTimeout(nomFunction, delayEnMS);
 	this.joueur = joueur;
-	this.playCard = playCard_alea;
+	this.playCard = playCard_piocher;
 	
 	this.play = function (){
 		setTimeout(this.playCard, this.delayActions);
@@ -19,10 +19,13 @@ function newIA_easy(joueur){
 	return ia;
 }
 
-
+function playCard_piocher(){
+	console.log("A Mwa de jouer !");
+	piocherCarte();
+}
 
 function playCard_alea(){
-	
+	console.log("A Mwa de jouer !");
 	var a = alea(0,this.joueur.carteEnMain.length);
 	if(a != this.joueur.carteEnMain.length){ //si on tente de jouer une carte de notre main
 		var isPlayed = false;
