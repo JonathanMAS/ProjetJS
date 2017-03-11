@@ -2,10 +2,8 @@ var pioche= [];
 var batailles = [];
 var joueurs = []; //array de joueur, indice 0 c'est nous
 var idJoueurActif = 0 ; //celui qui est en train de jouer
-var nbActionJoueur = [0,0];
-
-var initDuJeu = 1;
-
+var nbActionJoueur = [1,0];
+var initialisation=1;
 
 //paquets qui doit contenir toutes les cartes du jeu pour pouvoir les référencer.
 //On ne doit pas enlever ou ajouter de carte à ce paquets ormis lors de l'initialisation
@@ -23,6 +21,10 @@ function start(){
     defineFieldGame();
     afficherPioche();
     initJeu();
+    while(isPaused){
+        waitForIt();
+    }
+    initialisation=0;
 }
 function resize(){
     afficherPioche();
@@ -42,7 +44,6 @@ function melangerPioche(){
 
 
 function initPioche(){
-    isPaused = true;
 
     var v = document.getElementById("piocheImg");
     this.pioche= creerPaquet();
@@ -55,16 +56,12 @@ function initPioche(){
     v.onclick = piocherCarte;
     v.onmouseover = piocheMouseOver;
     v.onmouseout = piocheMouseOut;
-    isPaused=false;
 
 }
 
 function piocherCarte(){
-    if(initDuJeu==0){
-        alert("pioche mais pas init");
-        nbActionJoueur[idJoueurActif]--;
-    }
     isPaused=true;
+    if(nbActionJoueur[idJoueurActif]==1){
     var carte = pioche[pioche.length-1];
     
     joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
@@ -74,35 +71,33 @@ function piocherCarte(){
 
 	AffichagePiocherCarte(carte);
     
-    if(initDuJeu==0){
-        nextFunction(finDeTour);
+    finDeTour();
     }
     isPaused=false;
-    
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-    isPaused = true;
 
     var ia = [null, newIA_easy(joueurs[1])];
     for(var j = 0; j < 2; j++){
-        idJoueurActif = j;
+       // idJoueurActif = j;
         joueurs.push(newJoueur([], null, ia[j]));
         //sleep(900);
-        for (var i=0;i<6;i++){
-            piocherCarte();
+    }
+    for (var i=0;i<12;i++){
+        piocherCarte();
+        while(isPaused){
+            waitForIt();
         }
     }
-    isPaused=false;
-
 }
 
 function initJeu(){
+    isPaused=true;
     initPioche();
-    setTimeout(initJoueurs, 1000);
-    idJoueurActif=0;
-    nbActionJoueur[idJoueurActif]++;
-    initDuJeu=0;
+    initJoueurs();
+    isPaused=false;
+  //  idJoueurActif=0;
 }
 
 function afficheFinPartie(){
@@ -118,15 +113,19 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en
 }
 
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-    
+    nbActionJoueur[idJoueurActif]--;
     idJoueurActif=1-idJoueurActif; //switch joueur
     nbActionJoueur[idJoueurActif]++;
-    if(idJoueurActif==1){// appel IA
-    if(isPaused==false){
-        piocherCarte();
+    if(idJoueurActif==1&&initialisation!=1){
+        joueurs[idJoueurActif].IA.play();
     }
+  //  nbActionJoueur[idJoueurActif]++;
+  //  if(idJoueurActif==1){// appel IA
+   // if(isPaused==false){
+   //     piocherCarte();
+  //  }
         
-    }
+  //  }
 }
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs

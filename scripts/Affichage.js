@@ -4,8 +4,12 @@ height: document.body.clientHeight
 };
 
 
-function removeCarteMainJoueur(id){
+function removeCarteMain(id){
+    if(idJoueurActif==0){
     var main = document.getElementById("main");
+    }else{
+    var main = document.getElementById("main_adverse");
+    }
     for(var i=0;i<main.childNodes.length;i++){
         if(id == main.childNodes[i].id){
             main.removeChild(main.childNodes[i]);
@@ -13,11 +17,9 @@ function removeCarteMainJoueur(id){
     }
 }
 
-
 function updateCarteMainAdversaire(){
     var advers = document.getElementById("main_adverse");
     advers.style.marginTop = "-150px";
-    document.getElementById("center").style.marginTop = "100px";
     var cartesMain = joueurs[1].cartesEnMain;
     var img = document.createElement("img");
     img.src = "res/cartes/carte.png";
@@ -122,6 +124,7 @@ function afficherPioche(){
     var dim = ((size.height-300) - pioche.clientHeight)/2 ;
     var fieldPioche = document.getElementById("fieldPiocheScore");
     fieldPioche.style.paddingTop = dim + 'px';
+    fieldPioche.style.marginTop = - dim + 'px';
     fieldPioche.style.paddingBottom =dim + 'px';
 }
 

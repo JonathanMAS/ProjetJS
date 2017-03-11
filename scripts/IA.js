@@ -1,31 +1,32 @@
 
 var idIaStatic = 0;
 
-function IA(id, difficulty, delayActions, joueur){
+function IA(id, difficulty, delayActions){
 	this.idIa = id;
 	this.difficulty= difficulty; //un chiffre
 	this.delayActions = delayActions; //setTimeout(nomFunction, delayEnMS);
-	this.joueur = joueur;
-	this.playCard = playCard_piocher;
+	this.playCard = playCard_alea;
 	
 	this.play = function (){
-		setTimeout(this.playCard, this.delayActions);
+        setTimeout(this.playCard,this.delayActions);
 	}
 }
 
-function newIA_easy(joueur){
-	var ia = new IA(idIaStatic, 1, 200, joueur); //Un truc dans le genre
+function newIA_easy(){
+	var ia = new IA(idIaStatic, 1, 500); //Un truc dans le genre
 	idIaStatic++;
 	return ia;
 }
 
 function playCard_piocher(){
-	console.log("A Mwa de jouer !");
 	piocherCarte();
+    while(isPaused){
+        waitForIt();
+    }
 }
 
+
 function playCard_alea(){
-	console.log("A Mwa de jouer !");
 	var a = alea(0,this.joueur.carteEnMain.length);
 	if(a != this.joueur.carteEnMain.length){ //si on tente de jouer une carte de notre main
 		var isPlayed = false;
@@ -33,7 +34,7 @@ function playCard_alea(){
 			
 			var evt = {target : {id : this.joueur.carteEnMain[a]}}; //evt.target.id
 			
-			 poserCarte(evt);
+			 isPlayed = poserCarte(evt);
 			
 			a++; //carte suivante, au pire on pioche
 		}
