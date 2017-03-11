@@ -2,6 +2,10 @@ var pioche= [];
 var batailles = [];
 var joueurs = []; //array de joueur, indice 0 c'est nous
 var idJoueurActif = 0 ; //celui qui est en train de jouer
+var nbActionJoueur = [0,0];
+
+var initDuJeu = 1;
+
 
 //paquets qui doit contenir toutes les cartes du jeu pour pouvoir les référencer.
 //On ne doit pas enlever ou ajouter de carte à ce paquets ormis lors de l'initialisation
@@ -29,7 +33,7 @@ function melangerPioche(){
     var place = 0;
     var constante;
     for(var i = 0; i < pioche.length; i++){
-        place = alea(0, pioche.length);
+        place = alea(0, pioche.length-1);
         constante = pioche[i];
         pioche[i] = pioche[place];
         pioche[place] = constante;
@@ -38,6 +42,8 @@ function melangerPioche(){
 
 
 function initPioche(){
+    isPaused = true;
+
     var v = document.getElementById("piocheImg");
     this.pioche= creerPaquet();
     
@@ -49,10 +55,16 @@ function initPioche(){
     v.onclick = piocherCarte;
     v.onmouseover = piocheMouseOver;
     v.onmouseout = piocheMouseOut;
+    isPaused=false;
+
 }
 
 function piocherCarte(){
-    
+    if(initDuJeu==0){
+        alert("pioche mais pas init");
+        nbActionJoueur[idJoueurActif]--;
+    }
+    isPaused=true;
     var carte = pioche[pioche.length-1];
     
     joueurs[idJoueurActif].cartesEnMain.push(pioche[pioche.length-1]);
@@ -61,13 +73,17 @@ function piocherCarte(){
     pioche.pop();
 
 	AffichagePiocherCarte(carte);
-	
-	nextFunction(finDeTour);
-
+    
+    if(initDuJeu==0){
+        nextFunction(finDeTour);
+    }
+    isPaused=false;
+    
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
-    
+    isPaused = true;
+
     var ia = [null, newIA_easy(joueurs[1])];
     for(var j = 0; j < 2; j++){
         idJoueurActif = j;
@@ -77,16 +93,16 @@ function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
             piocherCarte();
         }
     }
+    isPaused=false;
+
 }
 
 function initJeu(){
     initPioche();
-    setTimeout(initJoueurs, 1500);
+    setTimeout(initJoueurs, 1000);
     idJoueurActif=0;
-}
-
-function afficherJeu(){
-    
+    nbActionJoueur[idJoueurActif]++;
+    initDuJeu=0;
 }
 
 function afficheFinPartie(){
@@ -103,19 +119,14 @@ function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en
 
 function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
     
-   // alert("fin de tour");
-    idJoueurActif=1-idJoueurActif;
-    //if(idJoueurActif==1){
-     //   piocherCarte();
-    //}else{
-       // finDeTourDeJeu();
-    //}
- //   if(joueurs[idJoueurActif].IA != null){ //si le joueur actuel est une IA
-  //      joueurs[idJoueurActif].IA.play(); // on laisse l'IA jouer
-   // }
- /*   if(idJoueurActif==1){ //on a fait un tour
-        finDeTourDeJeu();
-    }*/
+    idJoueurActif=1-idJoueurActif; //switch joueur
+    nbActionJoueur[idJoueurActif]++;
+    if(idJoueurActif==1){// appel IA
+    if(isPaused==false){
+        piocherCarte();
+    }
+        
+    }
 }
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
@@ -126,7 +137,11 @@ function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini l
     }
 }
 
-
+function waitForIt(){
+    while(isPaused) {
+        setTimeout(function(){waitForIt()},100);
+    }
+}
 
 function bataillesGagnantes(){ // met à jour chacune des batailles
     for(var i=0; this.batailles<this.batailles.length; i++){
@@ -140,7 +155,8 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 
 
 function poserGalion(carte){
-    
+    nbActionJoueur[idJoueurActif]--;
+
     if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){ //si une carte est selectionnée
         //alert("newBataille");
         var j =joueurs[idJoueurActif];
@@ -165,7 +181,8 @@ function poserGalion(carte){
 }
 
 function poserPirate(event){ //bataille, carte
-    
+    nbActionJoueur[idJoueurActif]--;
+
     //TODO verifier que la carte selectionnée est bien un pirate et que le galion de la bataille existe bien
     var j =joueurs[idJoueurActif];
     var idGalion = event.target.id;
