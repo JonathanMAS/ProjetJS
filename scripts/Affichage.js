@@ -4,7 +4,7 @@ height: document.body.clientHeight
 };
 
 
-function removeCarteMain(id){
+function removeCarteMainJoueur(id){
     if(idJoueurActif==0){
     var main = document.getElementById("main");
     }else{
