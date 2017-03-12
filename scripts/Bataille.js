@@ -73,6 +73,12 @@ function Bataille(id, listeCarte, galion){
             if(this.carteByColor[i].length!=0){
                 if(this.carteByColor[i][0].idJoueur==idJoueurActif){
                     MaCouleur= i;
+                    break;
+                }else{
+                    if(idTas==i){
+                    MaCouleur = -2;
+                    break;
+                    }
                 }
             }
         }
