@@ -12,7 +12,7 @@ function Bataille(id, listeCarte, galion){
 	this.JAUNE = 3;
 	
 	this.tourDerniereCarteGagnantePose = 0;
-	this.dernierJoueurGagnant = -1;
+	this.dernierJoueurGagnant = this.galion.idJoueur;
 	
 	this.batailleGagnante = function(){ //renvoie l'id du Joueur qui gagne à un instant donné ou -1 si égalité
 		
@@ -30,7 +30,7 @@ function Bataille(id, listeCarte, galion){
 			return this.listeCarte[0].idJoueur; //TODO à verifier : le dernier capitaine posé est gagnant
 		}
 		else{
-			for(var i=0; i < this.carteByColor.length; i++){ //on compte les points pour chaque joueur
+		/*	for(var i=0; i < this.carteByColor.length; i++){ //on compte les points pour chaque joueur
 				if(this.carteByColor[i].length != 0){ //s'il y a au moins une carte de cette couleur
 					joueurs_p.push(this.carteByColor[i][0].idJoueur); //on retient quel joueurs ont participé
 					for(var j=0; j < this.carteByColor[i].length; j++){ //pour chaque carte de couleur
@@ -53,9 +53,33 @@ function Bataille(id, listeCarte, galion){
 					return -1;
 				}
 			}
-			return joueurs_p[joueurGagnant];
-		}
-		
+			return joueurs_p[joueurGagnant];*/
+            
+            var score_joueur=0;
+            var score_IA=0;
+            for(var i=0;i<this.carteByColor.length;i++){
+                if(this.carteByColor[i].length!=0){
+                        for(var j=0;j<this.carteByColor[i].length;j++){
+                            if(this.carteByColor[i][0].idJoueur==0){
+                                score_joueur+= this.carteByColor[i][j].valeur;
+                            }else{
+                                score_IA+= this.carteByColor[i][j].valeur;
+                            }
+                        }
+                    }
+                }
+            }
+        if(score_joueur>score_IA){
+            return 0;
+        }else if(score_joueur<score_IA){
+            return 1;
+        }else{
+            if(this.listeCarte.length==1){
+                return this.galion.idJoueur;
+            }else{
+                return -1;
+            }
+        }
 		
 	}
 	

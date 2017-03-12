@@ -118,24 +118,30 @@ function isPartieFinie(){ //pioche.length = 0, un des joueurs n'a plus de carte 
 }
 
 function finDeTour() { //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
+   
 	numeroTourDeJeu++;
     nbActionJoueur[idJoueurActif]--;
+   
     idJoueurActif=1-idJoueurActif; //switch joueur
 	
-	updateBataillesGagnantes();
-    updateScore();
 	
     nbActionJoueur[idJoueurActif]++;
+    
+    updateBataillesGagnantes();
+    updateScore();
+
     if(idJoueurActif==1&&initialisation!=1){
         joueurs[idJoueurActif].IA.play();
     }
+    
     if(idJoueurActif==0){
 		console.log("A vous de jouer");
         finDeTourDeJeu();
     } else {
 		console.log("Tour de l'adversaire");
 	}
-	
+    
+   
 	
 }
 
@@ -159,22 +165,24 @@ function updateScore(){
 }
 
 function updateBataillesGagnantes(){ // met à jour chacune des batailles
-	console.log("=================================================");
-	console.log("Tour = "+numeroTourDeJeu);
+//	console.log("=================================================");
+//	console.log("Tour = "+numeroTourDeJeu);
     for(var i=0; i<batailles.length; i++){
         var victoire =  batailles[i].batailleGagnante();
 
-		console.log("bataille "+i+" gagnée ? ");
-		console.log("avantage = "+victoire+", dernierTourGagnant = "+batailles[i].tourDerniereCarteGagnantePose+", joueurActu = "+joueurs[idJoueurActif].idJoueur);
+	//	console.log("bataille "+i+" gagnée ? ");
+	//	console.log("avantage = "+victoire+", dernierTourGagnant = "+batailles[i].tourDerniereCarteGagnantePose+", joueurActu = "+joueurs[idJoueurActif].idJoueur);
 		//s'il y a une victoire, que cette victoire est du à tour précédent, et que le joueurActuel est celui qui gagne
-        if(victoire != -1 && numeroTourDeJeu != batailles[i].tourDerniereCarteGagnantePose && joueurs[idJoueurActif].idJoueur == batailles[i].dernierJoueurGagnant){
+      //  alert("Joueur"+victoire+" avantage le galion"+batailles[i].galion.valeur);
+        if(victoire != -1 && numeroTourDeJeu != batailles[i].tourDerniereCarteGagnantePose&& joueurs[idJoueurActif].idJoueur == batailles[i].dernierJoueurGagnant){
+           // alert("Joueur"+victoire+" remporte le galion"+batailles[i].galion.valeur);
             //alert(victoire);
-            joueurs[victoire].bataillesGagnees=batailles[i];
-            batailles.splice(i,1); //on le supprime des batailles
+            joueurs[victoire].bataillesGagnees.push(batailles[i]);
             removeBataille(batailles[i].idBataille);
+            batailles.splice(i,1); //on le supprime des batailles
         }
     }
-	console.log("___________________________________________");
+	//console.log("___________________________________________");
 }
 
 
