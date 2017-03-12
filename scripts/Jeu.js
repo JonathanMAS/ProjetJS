@@ -4,6 +4,7 @@ var joueurs = []; //array de joueur, indice 0 c'est nous
 var idJoueurActif = 0 ; //celui qui est en train de jouer
 var nbActionJoueur = [1,0];
 var initialisation=1;
+var numeroTourDeJeu=0;
 
 //paquets qui doit contenir toutes les cartes du jeu pour pouvoir les référencer.
 //On ne doit pas enlever ou ajouter de carte à ce paquets ormis lors de l'initialisation
@@ -116,25 +117,33 @@ function isPartieFinie(){ //pioche.length = 0, un des joueurs n'a plus de carte 
     }
 }
 
-function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
+function finDeTour() { //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
+	numeroTourDeJeu++;
     nbActionJoueur[idJoueurActif]--;
     idJoueurActif=1-idJoueurActif; //switch joueur
+	
+	updateBataillesGagnantes();
+    updateScore();
+	
     nbActionJoueur[idJoueurActif]++;
     if(idJoueurActif==1&&initialisation!=1){
         joueurs[idJoueurActif].IA.play();
     }
     if(idJoueurActif==0){
+		console.log("A vous de jouer");
         finDeTourDeJeu();
-    }
-
+    } else {
+		console.log("Tour de l'adversaire");
+	}
+	
+	
 }
 
 function finDeTourDeJeu(){
-    updateBataillesGagnantes();
-    updateScore();
-  /*  if(isPartieFinie()){ //
+    
+   /*if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
-    } */
+    }*/
 }
 
 function waitForIt(){
@@ -150,15 +159,22 @@ function updateScore(){
 }
 
 function updateBataillesGagnantes(){ // met à jour chacune des batailles
+	console.log("=================================================");
+	console.log("Tour = "+numeroTourDeJeu);
     for(var i=0; i<batailles.length; i++){
         var victoire =  batailles[i].batailleGagnante();
-        if(victoire!=-1){
-          //  alert(victoire);
+
+		console.log("bataille "+i+" gagnée ? ");
+		console.log("avantage = "+victoire+", dernierTourGagnant = "+batailles[i].tourDerniereCarteGagnantePose+", joueurActu = "+joueurs[idJoueurActif].idJoueur);
+		//s'il y a une victoire, que cette victoire est du à tour précédent, et que le joueurActuel est celui qui gagne
+        if(victoire != -1 && numeroTourDeJeu != batailles[i].tourDerniereCarteGagnantePose && joueurs[idJoueurActif].idJoueur == batailles[i].dernierJoueurGagnant){
+            //alert(victoire);
             joueurs[victoire].bataillesGagnees=batailles[i];
             batailles.splice(i,1); //on le supprime des batailles
             removeBataille(batailles[i].idBataille);
         }
     }
+	console.log("___________________________________________");
 }
 
 
