@@ -126,7 +126,7 @@ function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), is
 }
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
-   // alert("fin de tour de jeu");
+   alert("fin de tour de jeu");
 
   /*  if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
@@ -151,44 +151,46 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 
 
 function poserGalion(carte){
-   // alert("tentative pose d'un galion");
+    alert("tentative pose d'un galion");
+    isPaused=true;
 
-    nbActionJoueur[idJoueurActif]--;
-
-    if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){ //si une carte est selectionnée
+   // if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){ //si une carte est selectionnée
         //alert("newBataille");
+     //   carte = carteSelectionne;
         var j =joueurs[idJoueurActif];
         batailles.push(newBataille(j.carteSelectionne)); //on crée une battaille dont le galion selectionnée est donné
-        
-        var v = document.getElementById(carte.idCarte);
+        alert("onclick poserPirate :"+j.carteSelectionne.idCarte);
+        var v = document.getElementById(j.carteSelectionne.idCarte);
+        alert(v.onclick);
         v.onclick = poserPirate;
         v.onmouseover = carteMouseOver;
         v.onmouseout = carteMouseOut;
-        
+    
         unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
         
-        //alert(j.supprimerCarteEnMain(carte.idCarte));
-        removeCarteMainJoueur(carte.idCarte);
+        j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
+        removeCarteMainJoueur(j.carteSelectionne.idCarte);
         joueurs[idJoueurActif].carteSelectionne = null;
-        // idJoueurActif= 1 - idJoueurActif;
         v.style.opacity = "1";
+        isPaused=false;
         finDeTour();
-        return 1;
-    }else{
+    return 1;
+    /*}else{
         selectionnerCarte(carte);
-    }
-    return 0;
+    }*/
+ //   return 0;
 }
 
 function poserPirate(event){ //bataille, carte
-   // alert("tentative pose d'un pirate");
-    nbActionJoueur[idJoueurActif]--;
+    isPaused=true;
+   alert("tentative pose d'un pirate");
     var a_jouer=0;
     //TODO verifier que la carte selectionnée est bien un pirate et que le galion de la bataille existe bien
     var j =joueurs[idJoueurActif];
     var idGalion = event.target.id;
     if(j.carteSelectionne.type == "Pirate"){
         var b = findBataille(idGalion);
+
         if(b!=null){
             console.log("Tentatives de posage de pirate : ");
             if(b.addCarte(j.carteSelectionne)){ //si on a réussi à ajouter la carte
@@ -199,7 +201,6 @@ function poserPirate(event){ //bataille, carte
                 joueurs[idJoueurActif].carteSelectionne = null;
                 v.style.opacity = "1";
                 a_jouer=1;
-
                 /*	console.log("Je viens de poser un PIIIRATE !");
                  return true;
                  } else { //si on a pas réussi à ajouter la carte
@@ -209,61 +210,82 @@ function poserPirate(event){ //bataille, carte
             }
         }
     }
-    finDeTour();
+
+    isPaused=false;
+    if(a_jouer==1){
+        finDeTour();
+    }
+    alert("carte jouée?"+a_jouer);
     return a_jouer;
 }
 
 function poserAmiral(bataille,carte){ //bataille, carte
+    isPaused=true;
     alert("amiral");
-    return 0; //l'amiral n'as pas été posé
+    isPaused=false;
+    finDeTour();
+    return 1; //l'amiral n'as pas été posé
 }
 
 function poserCapitaine(bataille,carte){ //bataille, carte
+    isPaused=true;
     alert("capitaine");
-    return 0; //le capitaine n'as pas été posé
+    isPaused=false;
+    finDeTour();
+    return 1; //le capitaine n'as pas été posé
 }
 
 function poserCarte(evt){
-    isPaused= true;
     var joue = 0;
 
-    //var v = document.getElementById(evt.target.id);
     var carte = findCarte(evt.target.id);
-    //alert(carte);
-    var j =joueurs[idJoueurActif];
-    if(j.carteSelectionne != carte){
+    if(idJoueurActif==1){
+        joueurs[idJoueurActif].carteSelectionne=carte;
+    }
+    if(joueurs[idJoueurActif].carteSelectionne != carte && idJoueurActif!=1){
         selectionnerCarte(carte);
     } else{
         
         if(carte.type=="Galion"){
             joue= poserGalion(carte);
-        }
-        else if(carte.type=="Pirate"){
+            while(isPaused){
+                waitForIt();
+            }
+
+        }else if(carte.type=="Pirate"){
             var objet = {target : {id : carte.idCarte}};
             joue = poserPirate(objet);
+            while(isPaused){
+                waitForIt();
+            }
+
         }
         else if(carte.type=="Amiral"){
             joue = poserAmiral();
+            while(isPaused){
+                waitForIt();
+            }
+
         }
         else if(carte.type=="Capitaine"){
             joue = poserCapitaine();
+            while(isPaused){
+                waitForIt();
+            }
+
         }
         
     }
-    isPaused= false;
-
-    return joue;
     
-}
+    return joue;
+    }
 
 
 function selectionnerCarte(carte){ //carte
-    isPaused=true;
     if(joueurs[idJoueurActif].carteSelectionne != null)
         unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
     joueurs[idJoueurActif].carteSelectionne= carte;
     selectCarte(carte.idCarte);
-    isPaused=false;
 }
 
 

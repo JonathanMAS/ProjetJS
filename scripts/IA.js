@@ -18,11 +18,12 @@ function newIA_easy(){
 	return ia;
 }
 
-/*function playCard_piocher(){
+/*
+ function playCard_piocher(){
 	piocherCarte();
     while(isPaused){
         waitForIt();
-    }
+  }
 }*/
 
 /*
@@ -47,21 +48,18 @@ function playCard_alea(){
 }*/
 
 function playCard_alea(){
-    var piocher_jouer = alea(1,10); // Si piocher_jouer > 5 on tente de jouer sinon on pioche
+    var piocher_jouer = alea(1,10); // Si piocher_jouer > 1 on tente de jouer sinon on pioche
     if(piocher_jouer>1){
         var index_carte_alea= 0;
         var jouable=0;
         var cpt=0;
-        while(jouable!=1&&(cpt<joueurs[1].cartesEnMain.length)){ //tant qu'on arrive pas à jouer une carte on essaie une autre carte
-            index_carte_alea= alea(0, joueurs[1].cartesEnMain.length-1);
+        while(jouable!=1&&(cpt<joueurs[idJoueurActif].cartesEnMain.length)){ //tant qu'on arrive pas à jouer une carte on essaie une autre carte
+            index_carte_alea= alea(0, joueurs[idJoueurActif].cartesEnMain.length-1);
 
-            var evt = {target : { id : joueurs[1].cartesEnMain[index_carte_alea].idCarte }}; //evt.target.id
-           // alert(evt.target.id);
+            var evt = {target : { id : joueurs[idJoueurActif].cartesEnMain[index_carte_alea].idCarte }}; //evt.target.id
             var carte = findCarte(evt.target.id);
-          //  alert(carte);
-            joueurs[idJoueurActif].carteSelectionnee = carte;
+            joueurs[idJoueurActif].carteSelectionne = carte;
             jouable = poserCarte(evt);
-            
             cpt++;
         }
         if(jouable!=1){
