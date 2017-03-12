@@ -77,7 +77,9 @@ function Bataille(id, listeCarte, galion){
             }
         }
         if(idTas!=MaCouleur&&MaCouleur!=-1){
+            if(idJoueurActif==0){
             alert("Tu ne peux pas jouer cette carte pour une de ces deux raisons: \n - un autre joueur utilise déja cette couleur\n - tu utilises déjà une autre couleur ");
+            }
             if(carte.type == "Amiral"){
                 this.listeCarte.unshift(carte); //on ajoute la carte
                 return true;

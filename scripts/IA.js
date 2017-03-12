@@ -59,6 +59,14 @@ function playCard_alea(){
             var evt = {target : { id : joueurs[idJoueurActif].cartesEnMain[index_carte_alea].idCarte }}; //evt.target.id
             var carte = findCarte(evt.target.id);
             joueurs[idJoueurActif].carteSelectionne = carte;
+            
+            if(carte.type == "Pirate"){
+                if(batailles.length!=0){
+                    index_carte_alea= alea(0, batailles.length-1);
+                    evt = {target : { id : batailles[index_carte_alea].galion.idCarte }};
+                }
+            }
+            alert("carte event galion"+evt.target.id);
             jouable = poserCarte(evt);
             cpt++;
         }
