@@ -71,7 +71,7 @@ function playCard_alea(){
                    
                 }
             }
-            alert("carte event galion"+evt.target.id);
+          //  alert("carte event galion"+evt.target.id);
             jouable = poserCarte(evt);
             cpt++;
         }

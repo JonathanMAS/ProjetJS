@@ -70,6 +70,11 @@ body{
     width: 10000px;
     display:inline;
 }
+
+#batailles{
+    width: 10000px;
+    display:flex;
+}
 #center{
     display:flex;
 }
@@ -90,7 +95,6 @@ body{
 #fieldGame{
     margin-top : 75px;
     display:flex;
-    overflow-x: scroll;
 }
 
 #fieldPiocheScore p {
@@ -102,6 +106,12 @@ body{
 
 #score_joueur{
     color: #E5C100;
+}
+
+
+#wrapper{
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 /* Turn on custom 8px wide scrollbar */
@@ -123,10 +133,9 @@ body{
   background: rgba(0,0,0,0.5);
   -webkit-border-radius: 100px;
 }
+
 ::-webkit-scrollbar-thumb:vertical:active {
   background: rgba(0,0,0,0.61); /* Some darker color when you click it */
   -webkit-border-radius: 100px;
 }
 
-background: linear-gradient(45deg, white, silver);
-min-height: 100%;
