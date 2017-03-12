@@ -63,7 +63,12 @@ function playCard_alea(){
             if(carte.type == "Pirate"){
                 if(batailles.length!=0){
                     index_carte_alea= alea(0, batailles.length-1);
-                    evt = {target : { id : batailles[index_carte_alea].galion.idCarte }};
+					var scoreIA = batailles[index_carte_alea].getScoreJoueur(joueurs[1].idJoueur) + carte.valeur;
+					var scoreJoueur = batailles[index_carte_alea].getScoreJoueur(joueurs[0].idJoueur);
+					if(scoreIA >= scoreJoueur){
+						evt = {target : { id : batailles[index_carte_alea].galion.idCarte }};
+					}
+                   
                 }
             }
             alert("carte event galion"+evt.target.id);

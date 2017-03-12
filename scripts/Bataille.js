@@ -100,6 +100,23 @@ function Bataille(id, listeCarte, galion){
         }
     }
     
+	this.getScoreJoueur = function(idJoueur){ //retourne le nombre de points de pirates pour le joueur donné
+		var idTas = 0;
+		for(var i=0; i < 4; i++){
+			if(this.carteByColor[i].length != 0){
+				if(this.carteByColor[i][0].idJoueur == idJoueur){
+					var score = 0;
+					for(var j = 0; j < this.carteByColor[i]; j++){
+						score += this.carteByColor[i][j].valeur;
+					}
+					
+					return score;
+				}
+			}
+		}
+		
+		return 0; //score non trouvé
+	}
 }
 
 function newBataille(galion){
