@@ -150,7 +150,7 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 
 
 
-function poserGalion(carte){
+function poserGalion(){
     alert("tentative pose d'un galion");
     isPaused=true;
 
@@ -159,19 +159,19 @@ function poserGalion(carte){
      //   carte = carteSelectionne;
         var j =joueurs[idJoueurActif];
         batailles.push(newBataille(j.carteSelectionne)); //on crée une battaille dont le galion selectionnée est donné
-        alert("onclick poserPirate :"+j.carteSelectionne.idCarte);
-        var v = document.getElementById(j.carteSelectionne.idCarte);
-        alert(v.onclick);
-        v.onclick = poserPirate;
-        v.onmouseover = carteMouseOver;
-        v.onmouseout = carteMouseOut;
-    
+      //  alert("onclick poserPirate :"+j.carteSelectionne.idCarte);
+    j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
+    removeCarteMainJoueur(j.carteSelectionne.idCarte);
+    var galion_b= document.getElementById(j.carteSelectionne.idCarte);
+  //  galion_b.onclick = poserPirate;
+      galion_b.onclick = poserCarte;
+
+   galion_b.onmouseout = carteMouseOut;
+    galion_b.onmouseover = carteMouseOver;
         unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
-        
-        j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
-        removeCarteMainJoueur(j.carteSelectionne.idCarte);
+    
         joueurs[idJoueurActif].carteSelectionne = null;
-        v.style.opacity = "1";
+        galion_b.style.opacity = "1";
         isPaused=false;
         finDeTour();
     return 1;
@@ -237,22 +237,23 @@ function poserCapitaine(bataille,carte){ //bataille, carte
 
 function poserCarte(evt){
     var joue = 0;
-
     var carte = findCarte(evt.target.id);
-    if(idJoueurActif==1){
+    alert(carte.idCarte);
+  /*  if(idJoueurActif==1){
         joueurs[idJoueurActif].carteSelectionne=carte;
-    }
-    if(joueurs[idJoueurActif].carteSelectionne != carte && idJoueurActif!=1){
+    }*/
+    if(joueurs[idJoueurActif].carteSelectionne != carte && idJoueurActif!=1&&findBataille(evt.target.id)==null){
         selectionnerCarte(carte);
+           
     } else{
         
-        if(carte.type=="Galion"){
+        if(joueurs[idJoueurActif].carteSelectionne.type=="Galion"){
             joue= poserGalion(carte);
             while(isPaused){
                 waitForIt();
             }
 
-        }else if(carte.type=="Pirate"){
+        }else if(joueurs[idJoueurActif].carteSelectionne.type=="Pirate"){
             var objet = {target : {id : carte.idCarte}};
             joue = poserPirate(objet);
             while(isPaused){
@@ -260,14 +261,14 @@ function poserCarte(evt){
             }
 
         }
-        else if(carte.type=="Amiral"){
+        else if(joueurs[idJoueurActif].carteSelectionne.type=="Amiral"){
             joue = poserAmiral();
             while(isPaused){
                 waitForIt();
             }
 
         }
-        else if(carte.type=="Capitaine"){
+        else if(joueurs[idJoueurActif].carteSelectionne.type=="Capitaine"){
             joue = poserCapitaine();
             while(isPaused){
                 waitForIt();

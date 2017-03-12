@@ -88,7 +88,7 @@ body{
     padding: 0px 20px;
 }
 #fieldGame{
-   /* margin-top : 150px;*/
+    margin-top : 75px;
     display:flex;
     overflow-x: scroll;
 }

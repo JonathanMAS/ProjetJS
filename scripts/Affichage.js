@@ -28,6 +28,8 @@ function updateCarteMainAdversaire(){
     img.style.opacity = "0.7";
     img.style.padding = "10px";
     advers.appendChild(img);
+ //   assignCarte(joueurs[1].cartesEnMain[cartesMain.length-1]);
+
 }
 
 function updateCarteMainJoueur(){
@@ -76,7 +78,7 @@ function ajouterAffichageCarteBataille(bataille,carte){
         bataille_div.appendChild(img);
     }else{
         img.style.marginRight = "-90px";
-        bataille_div.insertBefore(img, bataille.firstChild);
+        bataille_div.insertBefore(img, document.getElementById(bataille.galion.idCarte));
     }
 }
 
