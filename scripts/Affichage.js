@@ -17,6 +17,23 @@ function removeCarteMainJoueur(id){
     }
 }
 
+function removeBataille(id){
+    var batailles = document.getElementById("batailles");
+    for(var i=0;i<batailles.childNodes.length;i++){
+        if(id == batailles.childNodes[i].id){
+            batailles.removeChild(batailles.childNodes[i]);
+        }
+    }
+}
+
+function assignScore(id, score){
+    if(id==0){
+        document.getElementById("score_joueur").innerHTML = score;
+    }else{
+        document.getElementById("score_advers").innerHTML = score;
+    }
+}
+
 function updateCarteMainAdversaire(){
     var advers = document.getElementById("main_adverse");
     advers.style.marginTop = "-150px";
@@ -78,7 +95,7 @@ function ajouterAffichageCarteBataille(bataille,carte){
         bataille_div.appendChild(img);
     }else{
         img.style.marginRight = "-90px";
-        bataille_div.insertBefore(img, document.getElementById(bataille.galion.idCarte));
+        bataille_div.insertBefore(img, bataille_div.firstChild);
     }
 }
 

@@ -11,9 +11,9 @@ function Joueur(idJoueur, pseudo, cartesEnMain, carteSelectionne, bataillesGagne
 	
 	//fait par Sandra
 	this.getScore = function (){ //calcul le score du joueur grâce aux cartes dans bataillesGagnees, composé que de Galion ou d'autres cartes aussi ?????
-		var score;	
+		var score=0;
 		for(var i = 0; i < bataillesGagnees.length; i++){
-			score = score + bataillesGagnees[i].valeur;
+			score = score + bataillesGagnees[i].galion.valeur;
 		}
 		return score;
 	}
