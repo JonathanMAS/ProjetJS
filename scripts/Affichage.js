@@ -122,14 +122,14 @@ function defineFieldGame(){
     fieldGame.style.width = size.width - fieldPiocheScore.clientWidth + 'px';
 }
 
-function afficherPioche(){
+/*function afficherPioche(){
     var pioche = document.getElementById("pioche");
     var dim = ((size.height-300) - pioche.clientHeight)/2 ;
     var fieldPioche = document.getElementById("fieldPiocheScore");
     fieldPioche.style.paddingTop = dim + 'px';
     fieldPioche.style.marginTop = - dim + 'px';
     fieldPioche.style.paddingBottom =dim + 'px';
-}
+}*/
 
 
 function AffichagePiocherCarte(){

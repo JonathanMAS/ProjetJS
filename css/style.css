@@ -48,7 +48,8 @@ body{
 
 #top, #bottom{
     width: 100%;
-   /* border: 2px solid black; /* debug */
+    height: 270px;
+    /* border: 2px solid black; /* debug */
 }
 #bottom{
     position:absolute;

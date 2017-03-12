@@ -18,7 +18,6 @@ function alea(min, max){
 }
 
 function start(){
-    afficherPioche();
     defineFieldGame();
     initJeu();
     while(isPaused){
