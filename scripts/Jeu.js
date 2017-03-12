@@ -18,8 +18,8 @@ function alea(min, max){
 }
 
 function start(){
-    defineFieldGame();
     afficherPioche();
+    defineFieldGame();
     initJeu();
     while(isPaused){
         waitForIt();
@@ -126,7 +126,7 @@ function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), is
 }
 
 function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
-   alert("fin de tour de jeu");
+  // alert("fin de tour de jeu");
 
   /*  if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
@@ -151,7 +151,7 @@ function bataillesGagnantes(){ // met à jour chacune des batailles
 
 
 function poserGalion(){
-    alert("tentative pose d'un galion");
+    console.log("tentative pose d'un galion");
     isPaused=true;
 
    // if(joueurs[idJoueurActif].carteSelectionne!=null&&(joueurs[idJoueurActif].carteSelectionne.idCarte==carte.idCarte)){ //si une carte est selectionnée
@@ -183,7 +183,7 @@ function poserGalion(){
 
 function poserPirate(event){ //bataille, carte
     isPaused=true;
-   alert("tentative pose d'un pirate");
+   console.log("tentative pose d'un pirate");
     var a_jouer=0;
     //TODO verifier que la carte selectionnée est bien un pirate et que le galion de la bataille existe bien
     var j =joueurs[idJoueurActif];
@@ -215,7 +215,6 @@ function poserPirate(event){ //bataille, carte
     if(a_jouer==1){
         finDeTour();
     }
-    alert("carte jouée?"+a_jouer);
     return a_jouer;
 }
 
@@ -238,13 +237,13 @@ function poserCapitaine(bataille,carte){ //bataille, carte
 function poserCarte(evt){
     var joue = 0;
     var carte = findCarte(evt.target.id);
-    alert(carte.idCarte);
+  //  alert(carte.idCarte);
   /*  if(idJoueurActif==1){
         joueurs[idJoueurActif].carteSelectionne=carte;
     }*/
     if(joueurs[idJoueurActif].carteSelectionne != carte && idJoueurActif!=1&&findBataille(evt.target.id)==null){
         selectionnerCarte(carte);
-           
+        
     } else{
         
         if(joueurs[idJoueurActif].carteSelectionne.type=="Galion"){

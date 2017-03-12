@@ -66,7 +66,7 @@ function playCard_alea(){
                     evt = {target : { id : batailles[index_carte_alea].galion.idCarte }};
                 }
             }
-            alert("carte event galion"+evt.target.id);
+          //  alert("carte event galion"+evt.target.id);
             jouable = poserCarte(evt);
             cpt++;
         }

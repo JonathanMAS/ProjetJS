@@ -46,7 +46,7 @@ function updateCarteMainJoueur(){
 }
 
 function creerNouvelleBataille(object){
-    var fieldGame= document.getElementById("fieldGame");
+    var fieldGame= document.getElementById("batailles");
     var bataille = document.createElement("div");
     bataille.className="bataille";
     bataille.id = object.idBataille;
@@ -118,7 +118,8 @@ function piocheMouseOut(evt){
 
 function defineFieldGame(){
     var fieldGame = document.getElementById("fieldGame");
-    fieldGame.style.width = size.width + 'px';
+    var fieldPiocheScore = document.getElementById("fieldPiocheScore");
+    fieldGame.style.width = size.width - fieldPiocheScore.clientWidth + 'px';
 }
 
 function afficherPioche(){
