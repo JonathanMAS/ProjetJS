@@ -28,7 +28,7 @@ function removeBataille(id){
 
 function AffichagePiocheVide(){
     var v = document.getElementById("piocheImg");
-    v.src= "res/cartes/pass.png";
+    v.src= "res/cartes/passer.png";
     v.onclick = finDeTour;
     v.onmouseover = piocheMouseOver;
     v.onmouseout = piocheMouseOut;

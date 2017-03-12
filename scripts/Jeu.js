@@ -106,11 +106,32 @@ function initJeu(){
 }
 
 function afficheFinPartie(){
-	alert("BRAVO ! Vous avez PER - DU ! M'en fiche, c'est moi l'boss, je décide que tu as perdu, MOUHAHAHAHAHAHAHAHAHAHAHA *Rire qui n'en finis plus* !");
+    if(joueurs[1].getScore()<joueurs[0].getScore()){
+        alert("BRAVO ! Vous avez gagné !");
+    }else if(joueurs[1].getScore()>joueurs[0].getScore()){
+        alert("PERDU ! Réessayez!");
+    }else{
+        alert("DOMMAGE! La pire des défaites...!");
+
+    }
 }
 
 function isPartieFinie(){ //pioche.length = 0, un des joueurs n'a plus de carte en main
-    if(pioche.length==0 && (joueurs[0].cartesEnMain.length==0||joueurs[1].cartesEnMain.length==null)){
+    incapable= true;
+    for(var i=0;i<joueurs[0].cartesEnMain.length;i++){
+        if(joueurs[0].cartesEnMain[i].type=="Galion"){
+            incapable=false;
+        }
+    }
+    for(var i=0;i<joueurs[1].cartesEnMain.length;i++){
+        if(joueurs[1].cartesEnMain[i].type=="Galion"){
+            incapable=false;
+        }
+    }
+    if(pioche.length==0 && (joueurs[0].cartesEnMain.length==0||joueurs[1].cartesEnMain.length==0||incapable)){
+        updateBataillesGagnantes();
+        updateScore();
+        afficheFinPartie();
         return true;
     }else{
         return false;
@@ -118,7 +139,7 @@ function isPartieFinie(){ //pioche.length = 0, un des joueurs n'a plus de carte 
 }
 
 function finDeTour() { //donne la main au joueurSuivant, isBataillesGagnant(), isPartieFinie()
-   
+  //  alert("finDeTour");
 	numeroTourDeJeu++;
     nbActionJoueur[idJoueurActif]--;
    
@@ -146,10 +167,9 @@ function finDeTour() { //donne la main au joueurSuivant, isBataillesGagnant(), i
 }
 
 function finDeTourDeJeu(){
-    
-   /*if(isPartieFinie()){ //
+    if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
-    }*/
+    }
 }
 
 function waitForIt(){
