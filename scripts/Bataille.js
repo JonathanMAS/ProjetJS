@@ -11,6 +11,9 @@ function Bataille(id, listeCarte, galion){
 	this.BLEU = 2;
 	this.JAUNE = 3;
 	
+	this.tourDerniereCarteGagnantePose = 0;
+	this.dernierJoueurGagnant = -1;
+	
 	this.batailleGagnante = function(){ //renvoie l'id du Joueur qui gagne à un instant donné ou -1 si égalité
 		
 		//permet de trier les cartes par joueur pour calculer ses points
@@ -21,19 +24,24 @@ function Bataille(id, listeCarte, galion){
 		//on cherche un amiral :
 		if(this.listeCarte[0].type == "Amiral"){ 
 			return this.listeCarte[0].idJoueur; //celui qui pose l'amiral est forcément le gagnant
-		} else if(this.listeCarte[0].type == "Capitaine"){
+		} 
+		else if(this.listeCarte[0].type == "Capitaine"){
 			//TODO gérer le cas des capitaines dans Jeu.js
 			return this.listeCarte[0].idJoueur; //TODO à verifier : le dernier capitaine posé est gagnant
-		}else{
+		}
+		else{
 			for(var i=0; i < this.carteByColor.length; i++){ //on compte les points pour chaque joueur
 				if(this.carteByColor[i].length != 0){ //s'il y a au moins une carte de cette couleur
 					joueurs_p.push(this.carteByColor[i][0].idJoueur); //on retient quel joueurs ont participé
 					for(var j=0; j < this.carteByColor[i].length; j++){ //pour chaque carte de couleur
 						pointsJoueurs[i] += this.carteByColor[i][j].valeur; //on ajoute le score du joueur
 					}
-
 				}
 			}
+			if(joueurs_p.length == 0){
+				return -1;
+			}
+			
 			var joueurGagnant = 0;
 			for(var i=0; i < pointsJoueurs.length; i++){ //on cherche le joueur qui a le plus de points
 				if(pointsJoueurs[i] >= pointsJoueurs[joueurGagnant]){
@@ -54,6 +62,9 @@ function Bataille(id, listeCarte, galion){
 	//Ajoute les cartes pirates en fin de tas, les capitaine en début, et l'amiral avant les capitaines ET les pirates
 	this.addCarte = function(carte){ //retourn true si la carte a bien été posée
 		//verifier si le joueur n'as pas déjà posé une carte avec une couleur différente
+		
+		var lastJoueurGagnant = this.batailleGagnante();
+		
 		var idTas = 0; //on définis id du tas à modifier en fonction de la couleur
 		//carte = joueurs[idJoueurActif].carteSelectionne;
 		if(carte.couleur == "rouge"){
@@ -87,10 +98,17 @@ function Bataille(id, listeCarte, galion){
             }
             if(carte.type == "Amiral"){
                 this.listeCarte.unshift(carte); //on ajoute la carte
+				
+				var jGagnant = this.batailleGagnante();
+				if(jGagnant != -1 && jGagnant != lastJoueurGagnant){ // si le joueur gagnant a changé, on va mettre à jour 
+					this.tourDerniereCarteGagnantePose = numeroTourDeJeu;
+					this.dernierJoueurGagnant = jGagnant;
+				}
                 return true;
             }
             return false;
-        }else{
+        } 
+		else{
             if(carte.type == "Amiral"){
                 this.listeCarte.unshift(carte); //on ajoute la carte
             } else if(carte.type == "Capitaine"){
@@ -102,6 +120,12 @@ function Bataille(id, listeCarte, galion){
                 this.listeCarte.push(carte); //on ajoute la carte en fin
                 this.carteByColor[idTas].push(carte); //on ajoute la carte en fin
             }
+			
+			var jGagnant = this.batailleGagnante();
+			if(jGagnant != -1 && jGagnant != lastJoueurGagnant){ // si le joueur gagnant a changé, on va mettre à jour 
+				this.tourDerniereCarteGagnantePose = numeroTourDeJeu;
+				this.dernierJoueurGagnant = jGagnant;
+			}
             return true;
         }
     }
@@ -126,6 +150,9 @@ function Bataille(id, listeCarte, galion){
 		
 		return 0; //score non trouvé
 	}
+
+	
+	
 }
 
 function newBataille(galion){
