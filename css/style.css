@@ -41,6 +41,14 @@ body{
     padding: 10px 20px;
     font-size: 18px;
 }
+
+#Bouton_demarage a{
+	transition: background-color 1s;
+}
+
+#Bouton_demarage:hover a{
+    background-color:rgba(255,255,255,0.5);
+}
 #left, #right{
     width: 0;
     height:0;
