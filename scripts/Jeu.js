@@ -225,12 +225,44 @@ function poserAmiral(bataille,carte){ //bataille, carte
     return 1; //l'amiral n'as pas été posé
 }
 
-function poserCapitaine(bataille,carte){ //bataille, carte
+function poserCapitaine(event){ //bataille, carte
     isPaused=true;
-    alert("capitaine");
+   alert("tentative pose d'un capitaine");
+    var a_jouer=0;
+    
+    var j =joueurs[idJoueurActif];
+    var idGalion = event.target.id;
+    if(j.carteSelectionne.type == "Capitaine"){
+        var b = findBataille(idGalion);
+
+        if(b!=null){ //si on a trouvé la bataille en question
+            console.log("Tentative de pose de capitaine : ");
+			
+			//on ne peut poser un capitaine que si on a déjà posé une carte
+			var scoreJoueur = b.getScoreJoueur(joueurs[idJoueurActif].idJoueur);
+			
+			console.log("Score joueur ?");
+			console.log(scoreJoueur);
+			if(scoreJoueur != 0){ //si on a déjà posé une carte, on a le droit de poser un capitaine
+				if(b.addCarte(j.carteSelectionne)){ //si on a réussi à ajouter la carte
+					var v = document.getElementById(joueurs[idJoueurActif].carteSelectionne.idCarte);
+					unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
+					j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
+					removeCarteMainJoueur(j.carteSelectionne.idCarte);
+					joueurs[idJoueurActif].carteSelectionne = null;
+					v.style.opacity = "1";
+					a_jouer=1;
+				}
+			}
+		}
+    }
+
     isPaused=false;
-    finDeTour();
-    return 1; //le capitaine n'as pas été posé
+    if(a_jouer==1){
+        finDeTour();
+    }
+    alert("carte jouée?"+a_jouer);
+    return a_jouer;
 }
 
 function poserCarte(evt){
@@ -260,14 +292,16 @@ function poserCarte(evt){
 
         }
         else if(joueurs[idJoueurActif].carteSelectionne.type=="Amiral"){
-            joue = poserAmiral();
+			var objet = {target : {id : carte.idCarte}};
+            joue = poserAmiral(objet);
             while(isPaused){
                 waitForIt();
             }
 
         }
         else if(joueurs[idJoueurActif].carteSelectionne.type=="Capitaine"){
-            joue = poserCapitaine();
+			var objet = {target : {id : carte.idCarte}};
+            joue = poserCapitaine(objet);
             while(isPaused){
                 waitForIt();
             }
