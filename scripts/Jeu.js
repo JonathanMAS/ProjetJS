@@ -68,12 +68,17 @@ function piocherCarte(){
     pioche[pioche.length-1].idJoueur = joueurs[idJoueurActif].idJoueur;
     
     pioche.pop();
-
+        if(pioche.length==0){
+            AffichagePiocheVide();
+        }
 	AffichagePiocherCarte(carte);
     
     finDeTour();
+    
     }
+
     isPaused=false;
+        
 }
 
 function initJoueurs(){ //associer actionJoueur() au onClick onKeyDown
@@ -104,8 +109,8 @@ function afficheFinPartie(){
 	alert("BRAVO ! Vous avez PER - DU ! M'en fiche, c'est moi l'boss, je décide que tu as perdu, MOUHAHAHAHAHAHAHAHAHAHAHA *Rire qui n'en finis plus* !");
 }
 
-function isPartieFinie(){ //pioche.size = 0, un des joueurs n'a plus de carte en main
-    if(pioche.size==0 && (joueurs[0].cartesEnMain==null||joueurs[1].cartesEnMain==null)){
+function isPartieFinie(){ //pioche.length = 0, un des joueurs n'a plus de carte en main
+    if(pioche.length==0 && (joueurs[0].cartesEnMain.length==0||joueurs[1].cartesEnMain.length==null)){
         return true;
     }else{
         return false;
@@ -158,6 +163,7 @@ function updateBataillesGagnantes(){ // met à jour chacune des batailles
 	console.log("Tour = "+numeroTourDeJeu);
     for(var i=0; i<batailles.length; i++){
         var victoire =  batailles[i].batailleGagnante();
+
 		console.log("bataille "+i+" gagnée ? ");
 		console.log("avantage = "+victoire+", dernierTourGagnant = "+batailles[i].tourDerniereCarteGagnantePose+", joueurActu = "+joueurs[idJoueurActif].idJoueur);
 		//s'il y a une victoire, que cette victoire est du à tour précédent, et que le joueurActuel est celui qui gagne

@@ -26,6 +26,14 @@ function removeBataille(id){
     }
 }
 
+function AffichagePiocheVide(){
+    var v = document.getElementById("piocheImg");
+    v.src= "res/cartes/pass.png";
+    v.onclick = finDeTour;
+    v.onmouseover = piocheMouseOver;
+    v.onmouseout = piocheMouseOut;
+}
+
 function assignScore(id, score){
     if(id==0){
         document.getElementById("score_joueur").innerHTML = score;
