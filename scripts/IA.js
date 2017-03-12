@@ -48,7 +48,12 @@ function playCard_alea(){
 }*/
 
 function playCard_alea(){
-    var piocher_jouer = alea(1,10); // Si piocher_jouer > 1 on tente de jouer sinon on pioche
+    var proba = 10;
+    if(pioche.length==0){
+        proba=10;
+    }
+    var piocher_jouer = alea(1,proba); // Si piocher_jouer > 1 on tente de jouer sinon on pioche
+    
     if(piocher_jouer>1){
         var index_carte_alea= 0;
         var jouable=0;
@@ -76,7 +81,11 @@ function playCard_alea(){
             cpt++;
         }
         if(jouable!=1){
+            if(pioche.length>0){
             piocherCarte();
+            }else{
+            finDeTour();
+            }
         }
     }else{
         piocherCarte();
