@@ -1,4 +1,4 @@
-﻿var idBatailleStatic = 0;
+var idBatailleStatic = 0;
 
 function Bataille(id, listeCarte, galion){
     this.idBataille = id;
@@ -14,7 +14,7 @@ function Bataille(id, listeCarte, galion){
 	this.batailleGagnante = function(){ //renvoie l'id du Joueur qui gagne à un instant donné ou -1 si égalité
 		
 		//permet de trier les cartes par joueur pour calculer ses points
-		var joueurs = []; //contient les id des joueurs qui ont participés à la bataille dans l'odre de leur couleur
+		var joueurs_p = []; //contient les id des joueurs qui ont participés à la bataille dans l'odre de leur couleur
 		var pointsJoueurs = []; //
 		//si la dernière carte la plus forte posée apartient au joueur courant, il gagne la bataille
 		
@@ -27,7 +27,7 @@ function Bataille(id, listeCarte, galion){
 		}else{
 			for(var i=0; i < this.carteByColor.length; i++){ //on compte les points pour chaque joueur
 				if(this.carteByColor[i].length != 0){ //s'il y a au moins une carte de cette couleur
-					joueurs.push(this.carteByColor[i][0].idJoueur); //on retient quel joueurs ont participé
+					joueurs_p.push(this.carteByColor[i][0].idJoueur); //on retient quel joueurs ont participé
 					for(var j=0; j < this.carteByColor[i].length; j++){ //pour chaque carte de couleur
 						pointsJoueurs[i] += this.carteByColor[i][j].valeur; //on ajoute le score du joueur
 					}
@@ -45,8 +45,7 @@ function Bataille(id, listeCarte, galion){
 					return -1;
 				}
 			}
-			return joueurs[joueurGagnant];
-			
+			return joueurs_p[joueurGagnant];
 		}
 		
 		
@@ -92,12 +91,13 @@ function Bataille(id, listeCarte, galion){
             }
             return false;
         }else{
-            if(carte.type == "Capitaine"){
-                this.listeCarte.unshift(carte); //on ajoute le capitaine en début de tableau
-                this.carteByColor[idTas].unshift(carte); //on ajoute le capitaine en début de tableau
-            } else if(carte.type == "Amiral"){
+            if(carte.type == "Amiral"){
                 this.listeCarte.unshift(carte); //on ajoute la carte
-            } else { //carte générale
+            } else if(carte.type == "Capitaine"){
+                ajouterAffichageCarteBataille(this,carte);
+                this.listeCarte.unshift(carte); //on ajoute la carte en fin
+                this.carteByColor[idTas].unshift(carte); //on ajoute la carte en fin
+            }else{//carte générale
                 ajouterAffichageCarteBataille(this,carte);
                 this.listeCarte.push(carte); //on ajoute la carte en fin
                 this.carteByColor[idTas].push(carte); //on ajoute la carte en fin

@@ -124,9 +124,9 @@ function finDeTour(){ //donne la main au joueurSuivant, isBataillesGagnant(), is
 
 }
 
-function finDeTourDeJeu(){ //est parfois appelé par finDeTour quand on a fini le tour de chaque joueurs
-  // alert("fin de tour de jeu");
-
+function finDeTourDeJeu(){
+    updateBataillesGagnantes();
+    updateScore();
   /*  if(isPartieFinie()){ //
         afficheFinPartie();					//Une fonction pour finir le jeu?
     } */
@@ -138,11 +138,20 @@ function waitForIt(){
     }
 }
 
-function bataillesGagnantes(){ // met à jour chacune des batailles
-    for(var i=0; this.batailles<this.batailles.length; i++){
+function updateScore(){
+    for(var i=0;i<joueurs.length;i++){
+        assignScore(i, joueurs[i].getScore());
+    }
+}
+
+function updateBataillesGagnantes(){ // met à jour chacune des batailles
+    for(var i=0; i<batailles.length; i++){
         var victoire =  batailles[i].batailleGagnante();
         if(victoire!=-1){
-            this.joueurs[victoire].bataillesGagnees=batailles[i];
+            alert(victoire);
+            joueurs[victoire].bataillesGagnees=batailles[i];
+            batailles.splice(i,1); //on le supprime des batailles
+            removeBataille(batailles[i].idBataille);
         }
     }
 }
@@ -227,7 +236,7 @@ function poserAmiral(bataille,carte){ //bataille, carte
 
 function poserCapitaine(event){ //bataille, carte
     isPaused=true;
-   alert("tentative pose d'un capitaine");
+   console.log("tentative pose d'un capitaine");
     var a_jouer=0;
     
     var j =joueurs[idJoueurActif];
@@ -260,8 +269,12 @@ function poserCapitaine(event){ //bataille, carte
     isPaused=false;
     if(a_jouer==1){
         finDeTour();
+    }else{
+        if(idJoueurActif==0){
+        alert("Vous devez d'abord poser un pirate de la couleur du capitaine avant de pouvoir le jouer");
+        }
     }
-    alert("carte jouée?"+a_jouer);
+   // alert("carte jouée?"+a_jouer);
     return a_jouer;
 }
 
