@@ -247,12 +247,35 @@ function poserPirate(event){ //bataille, carte
     return a_jouer;
 }
 
-function poserAmiral(bataille,carte){ //bataille, carte
+function poserAmiral(event){ //bataille, carte
     isPaused=true;
-    alert("amiral");
+   console.log("tentative pose d'un amiral");
+    var a_jouer=0;
+    //TODO verifier que la carte selectionnée est bien un pirate et que le galion de la bataille existe bien
+    var j =joueurs[idJoueurActif];
+    var idGalion = event.target.id;
+    if(j.carteSelectionne.type == "Amiral"){
+        var b = findBataille(idGalion);
+
+        if(b!=null){
+            console.log("Tentatives de posage de pirate : ");
+            if(b.addCarte(j.carteSelectionne)){ //si on a réussi à ajouter la carte
+                var v = document.getElementById(joueurs[idJoueurActif].carteSelectionne.idCarte);
+                unselectCarte(joueurs[idJoueurActif].carteSelectionne.idCarte);
+                j.supprimerCarteEnMain(j.carteSelectionne.idCarte);
+                removeCarteMainJoueur(j.carteSelectionne.idCarte);
+                joueurs[idJoueurActif].carteSelectionne = null;
+                v.style.opacity = "1";
+                a_jouer=1;
+            }
+        }
+    }
+
     isPaused=false;
-    finDeTour();
-    return 1; //l'amiral n'as pas été posé
+    if(a_jouer==1){
+        finDeTour();
+    }
+    return a_jouer;
 }
 
 function poserCapitaine(event){ //bataille, carte
