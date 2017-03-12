@@ -104,12 +104,15 @@ function Bataille(id, listeCarte, galion){
 		var idTas = 0;
 		for(var i=0; i < 4; i++){
 			if(this.carteByColor[i].length != 0){
+				//console.log("Joueur : "+this.carteByColor[i][0].idJoueur+" == "+idJoueur+" ?");
+				
 				if(this.carteByColor[i][0].idJoueur == idJoueur){
+					//console.log("Calcul score ...");
 					var score = 0;
-					for(var j = 0; j < this.carteByColor[i]; j++){
+					for(var j = 0; j < this.carteByColor[i].length; j++){
 						score += this.carteByColor[i][j].valeur;
 					}
-					
+					//console.log("score : "+score);
 					return score;
 				}
 			}
