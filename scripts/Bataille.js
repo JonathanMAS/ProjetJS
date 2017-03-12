@@ -88,7 +88,15 @@ function Bataille(id, listeCarte, galion){
 		//verifier si le joueur n'as pas déjà posé une carte avec une couleur différente
 		
 		var lastJoueurGagnant = this.batailleGagnante();
-		
+		if(carte.type=="Amiral"){
+            this.listeCarte.unshift(carte); //on ajoute la carte
+            var jGagnant = this.batailleGagnante();
+            if(jGagnant != -1 && jGagnant != lastJoueurGagnant){ // si le joueur gagnant a changé, on va mettre à jour
+                this.tourDerniereCarteGagnantePose = numeroTourDeJeu;
+                this.dernierJoueurGagnant = jGagnant;
+            }
+            return true;
+        }
 		var idTas = 0; //on définis id du tas à modifier en fonction de la couleur
 		//carte = joueurs[idJoueurActif].carteSelectionne;
 		if(carte.couleur == "rouge"){
