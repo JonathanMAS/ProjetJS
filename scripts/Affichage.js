@@ -56,7 +56,7 @@ function creerNouvelleBataille(object){
     galion.style.zIndex = "999";
     galion.style.position = "relative";
     bataille.appendChild(galion);
-    bataille.onClick = poserCarte;
+   // bataille.onClick = poserCarte;
 }
 
 
