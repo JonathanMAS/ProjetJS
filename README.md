@@ -1,0 +1,3 @@
+# ProjetJS
+
+Ce projet de 2ème année d'iut informatique consistait à manipuler du code `javascript`. On a choisi pour cela de créer un jeu. Celui du **korsar**. C'est un jeu de carte dans lequel les joueurs s'affrontent pour le controle de **Galions** à l'aide de **Pirates**. Chaque galion a une valeur, et chaque pirate a une capacité d'attaque, ainsi qu'une couleur. De plus, il existe des **Capitaines** qui surpassent les pirates, et un **Amiral** pour les gouverner tous ...
